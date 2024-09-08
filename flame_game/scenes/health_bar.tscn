@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dykulub11xd1l"]
+
+[ext_resource type="Texture2D" uid="uid://c6fbp4jcfx706" path="res://assets/Fire Bar/FireBar_Under.png" id="1_ippwy"]
+[ext_resource type="Script" path="res://scripts/health_bar.gd" id="1_ofaca"]
+[ext_resource type="Texture2D" uid="uid://cqby5eivd65ba" path="res://assets/Fire Bar/FireBar_Over.png" id="2_257jj"]
+
+[node name="Health_Bar" type="TextureProgressBar"]
+offset_right = 7.0
+offset_bottom = 7.0
+texture_under = ExtResource("1_ippwy")
+texture_over = ExtResource("2_257jj")
+texture_progress = ExtResource("1_ippwy")
+tint_under = Color(0.122252, 0.122252, 0.122252, 1)
+tint_over = Color(0.951968, 0.17013, 1.92523e-07, 1)
+tint_progress = Color(1, 0.529412, 0, 1)
+script = ExtResource("1_ofaca")

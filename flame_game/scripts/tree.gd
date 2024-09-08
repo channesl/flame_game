@@ -2,6 +2,7 @@ extends StaticBody2D
 
 
 @onready var label : Label = $Label
+@onready var log : PackedScene = preload("res://scenes/log.tscn")
 
 var text_percent_visible : float = 0.0
 var text_length : int = 15
@@ -13,8 +14,8 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _physics_process(delta: float) -> void:
+	chop_down()
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -38,8 +39,15 @@ func _on_timer_timeout() -> void:
 		if label.visible_ratio <= 0:
 			$Label/Timer.stop()
 			
-			
-			
+func chop_down() -> void:
+	if player_in_area == true:
+		if %Player_Lumberjack.is_possessed:
+			if Input.is_action_just_pressed("interact"):
+				var new_log_scene = log.instantiate()
+				%Trees.call_deferred("add_child", new_log_scene)
+				new_log_scene.position = position
+				queue_free()
+				
 			
 			
 			

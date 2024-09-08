@@ -116,3 +116,8 @@ autoplay = "Idle"
 position = Vector2(0, 3)
 scale = Vector2(2.74956, -2.72083)
 shape = SubResource("CircleShape2D_q7572")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

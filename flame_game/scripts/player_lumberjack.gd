@@ -58,5 +58,6 @@ func interact_fire():
 			is_possessed = true
 			print(is_possessed)
 			player_fire.is_possessing = true
-			$Camera2D.make_current()
+			%Player_Cam.set_to_follow(self)
+			#%Lumber_Cam.make_current()
 		

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://c23nmispi7up6"]
+
+[ext_resource type="Script" path="res://log.gd" id="1_2qw4e"]
+[ext_resource type="Texture2D" uid="uid://b8pyj7igst01q" path="res://assets/mystic_woods/objects/objects.png" id="2_tdx5w"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vtib1"]
+radius = 6.0
+height = 28.0
+
+[node name="Log" type="StaticBody2D"]
+script = ExtResource("1_2qw4e")
+added_health = 100
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vtib1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tdx5w")
+region_enabled = true
+region_rect = Rect2(95, 96, 32, 16)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
