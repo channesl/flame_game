@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bovcgvqn8qrkd"]
+[gd_scene load_steps=12 format=4 uid="uid://bovcgvqn8qrkd"]
 
 [ext_resource type="Texture2D" uid="uid://cjibmnckixccw" path="res://assets/mystic_woods/tilesets/water1.png" id="3_ai5d7"]
 [ext_resource type="PackedScene" uid="uid://b8a563eusn7r2" path="res://scenes/tree.tscn" id="4_fwism"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://doqdkwnqc2a47" path="res://scenes/player_fire.tscn" id="5_vsqa3"]
 [ext_resource type="PackedScene" uid="uid://cwsvceqb6kv5r" path="res://scenes/player_cam.tscn" id="6_r4yaq"]
 [ext_resource type="PackedScene" uid="uid://dykulub11xd1l" path="res://scenes/health_bar.tscn" id="7_iap5e"]
+[ext_resource type="PackedScene" uid="uid://bncy5rjo5j0yv" path="res://scenes/water_enemy.tscn" id="8_aw1ss"]
 [ext_resource type="PackedScene" uid="uid://ca1dnr517d2qy" path="res://scenes/player_lumberjack.tscn" id="9_lavmm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gjbuy"]
@@ -275,3 +276,6 @@ stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
 player = NodePath("../../../Player_Fire")
+
+[node name="Water_Enemy" parent="." instance=ExtResource("8_aw1ss")]
+position = Vector2(-94, -29)

@@ -1,0 +1,102 @@
+[gd_scene load_steps=15 format=3 uid="uid://bncy5rjo5j0yv"]
+
+[ext_resource type="Texture2D" uid="uid://c3m5t8oelpvqf" path="res://assets/Water Elemental/Spritesheets/Elemental Water 2/Elemental_Water_2_Idle.png" id="1_emdhh"]
+[ext_resource type="Texture2D" uid="uid://bd0v82ifln7d4" path="res://assets/Water Elemental/Spritesheets/Elemental Water 2/Elemental_Water_2_Move.png" id="2_kfwcw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06b0m"]
+atlas = ExtResource("1_emdhh")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bos8"]
+atlas = ExtResource("1_emdhh")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7r7xu"]
+atlas = ExtResource("1_emdhh")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqg85"]
+atlas = ExtResource("1_emdhh")
+region = Rect2(384, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxnvk"]
+atlas = ExtResource("2_kfwcw")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdalm"]
+atlas = ExtResource("2_kfwcw")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_de7ol"]
+atlas = ExtResource("2_kfwcw")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0u3py"]
+atlas = ExtResource("2_kfwcw")
+region = Rect2(384, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ydsp"]
+atlas = ExtResource("2_kfwcw")
+region = Rect2(512, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmtjq"]
+atlas = ExtResource("2_kfwcw")
+region = Rect2(640, 256, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qj48w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06b0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bos8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7r7xu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqg85")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxnvk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdalm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_de7ol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0u3py")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ydsp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmtjq")
+}],
+"loop": true,
+"name": &"Running",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_drxxj"]
+radius = 5.0
+
+[node name="Water_Enemy" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qj48w")
+animation = &"Running"
+autoplay = "Idle"
+frame = 2
+frame_progress = 0.393429
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_drxxj")
