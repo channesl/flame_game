@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://bncy5rjo5j0yv"]
+[gd_scene load_steps=16 format=3 uid="uid://bncy5rjo5j0yv"]
 
 [ext_resource type="Texture2D" uid="uid://c3m5t8oelpvqf" path="res://assets/Water Elemental/Spritesheets/Elemental Water 2/Elemental_Water_2_Idle.png" id="1_emdhh"]
+[ext_resource type="Script" path="res://scripts/water_enemy.gd" id="1_jw8to"]
 [ext_resource type="Texture2D" uid="uid://bd0v82ifln7d4" path="res://assets/Water Elemental/Spritesheets/Elemental Water 2/Elemental_Water_2_Move.png" id="2_kfwcw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_06b0m"]
@@ -90,6 +91,8 @@ animations = [{
 radius = 5.0
 
 [node name="Water_Enemy" type="CharacterBody2D"]
+script = ExtResource("1_jw8to")
+speed = 50.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qj48w")

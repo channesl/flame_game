@@ -1,8 +1,33 @@
-[gd_scene load_steps=16 format=3 uid="uid://doqdkwnqc2a47"]
+[gd_scene load_steps=23 format=3 uid="uid://doqdkwnqc2a47"]
 
 [ext_resource type="Script" path="res://scripts/player_fire.gd" id="1_yrmfs"]
 [ext_resource type="Texture2D" uid="uid://cmrne26v3e3i" path="res://assets/Fire Elemental 2/Monster Pack 37 (Elementals 2)/Spritesheets/Elemental Fire 2/Elemental_Fire_2_Idle.png" id="2_j7in3"]
+[ext_resource type="Texture2D" uid="uid://upj5ylo85ws7" path="res://assets/Fire Elemental 2/Monster Pack 37 (Elementals 2)/Spritesheets/Elemental Fire 2/Elemental_Fire_2_Attack.png" id="2_o065p"]
 [ext_resource type="Texture2D" uid="uid://ybslhkkxonv6" path="res://assets/Fire Elemental 2/Monster Pack 37 (Elementals 2)/Spritesheets/Elemental Fire 2/Elemental_Fire_2_Move.png" id="3_dfrva"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lk73"]
+atlas = ExtResource("2_o065p")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47ntn"]
+atlas = ExtResource("2_o065p")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qfur"]
+atlas = ExtResource("2_o065p")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofjed"]
+atlas = ExtResource("2_o065p")
+region = Rect2(384, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ie45y"]
+atlas = ExtResource("2_o065p")
+region = Rect2(512, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3s8t"]
+atlas = ExtResource("2_o065p")
+region = Rect2(640, 256, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q3kdi"]
 atlas = ExtResource("2_j7in3")
@@ -46,6 +71,29 @@ region = Rect2(640, 256, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_34vdd"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7lk73")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47ntn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2qfur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofjed")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ie45y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3s8t")
+}],
+"loop": false,
+"name": &"Attacking",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_q3kdi")
@@ -96,10 +144,8 @@ script = ExtResource("1_yrmfs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_34vdd")
-animation = &"Running"
+animation = &"Attacking"
 autoplay = "Idle"
-frame = 1
-frame_progress = 0.28412
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
@@ -109,4 +155,7 @@ shape = SubResource("CircleShape2D_q7572")
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

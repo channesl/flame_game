@@ -5,11 +5,19 @@ extends CharacterBody2D
 
 @export var movement_speed : float = 200
 
+signal get_possessed
+signal not_possessed
 
 var input_direction : Vector2 = Vector2.ZERO
 var animation_locked : bool = false
 var fire_in_area : bool = false
 var is_possessed : bool = false
+
+func _ready() -> void:
+	player_fire.stop_possess.connect(set_is_possessed)
+	
+func _input(event: InputEvent) -> void:
+	interact_fire()
 
 func _physics_process(delta: float) -> void:
 	
@@ -17,7 +25,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	update_facing_direction()
 	update_animation()
-	interact_fire()
+	
 	
 	
 func movement():
@@ -45,19 +53,24 @@ func update_animation():
 			animated_sprite.play("Idle")
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	print("enter lumber")
 	fire_in_area = true
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	fire_in_area = false
+	if !is_possessed:
+		fire_in_area = false
+	
+func set_is_possessed():
+	is_possessed = not is_possessed
 	
 func interact_fire():
 	if fire_in_area:
-		if Input.is_action_just_pressed("interact"):
-			is_possessed = true
-			print(is_possessed)
-			player_fire.is_possessing = true
-			%Player_Cam.set_to_follow(self)
-			#%Lumber_Cam.make_current()
+		if Input.is_action_just_pressed("possess"):
+			if !is_possessed:
+				set_is_possessed()
+				get_possessed.emit()
+				%Player_Cam.set_to_follow(self)
+			else:
+				not_possessed.emit()
+			
 		

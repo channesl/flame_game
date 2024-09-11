@@ -279,3 +279,7 @@ player = NodePath("../../../Player_Fire")
 
 [node name="Water_Enemy" parent="." instance=ExtResource("8_aw1ss")]
 position = Vector2(-94, -29)
+stop_range = 50.0
+
+[node name="Projectiles" type="Node2D" parent="."]
+unique_name_in_owner = true

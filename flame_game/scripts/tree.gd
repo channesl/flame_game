@@ -19,7 +19,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	print("Entered tree zone")
 	player_in_area = true
 	$Label/Timer.start()
 
