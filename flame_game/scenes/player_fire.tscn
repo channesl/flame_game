@@ -141,6 +141,13 @@ radius = 1.81847
 [node name="Player_Fire" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_yrmfs")
+movement_speed = 150.0
+max_health = 100
+shoot_cooldown_time = 1.5
+loose_health_time = 0.5
+fireball_cost = 5
+time_damage = 2
+time_damage_possessing = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_34vdd")
@@ -157,5 +164,8 @@ autostart = true
 
 [node name="Marker2D" type="Marker2D" parent="."]
 
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ShootCooldownTimer" to="." method="_on_shoot_cooldown_timer_timeout"]

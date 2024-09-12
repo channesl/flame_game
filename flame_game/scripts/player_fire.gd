@@ -8,11 +8,17 @@ signal stop_possess
 @onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var player_lumberjack : CharacterBody2D = %Player_Lumberjack
 @onready var current_health : int = max_health
+@onready var shoot_cooldown_timer : Timer = $ShootCooldownTimer
 
-@export var movement_speed : float = 200
-@export var max_health : int = 100
+@export var movement_speed : float
+@export var max_health : int
+@export var shoot_cooldown_time : float
+@export var loose_health_time : float
+@export var fireball_cost : int
+@export var time_damage : int
+@export var time_damage_possessing : int
 
-
+var shoot_cooldown : bool = false
 var input_direction : Vector2 = Vector2.ZERO
 var animation_locked : bool = false
 var is_possessing : bool = false
@@ -21,6 +27,7 @@ var fireball_unlocked : bool = true
 func _ready() -> void:
 	player_lumberjack.get_possessed.connect(set_is_possessing)
 	player_lumberjack.not_possessed.connect(release_lumberjack)
+	$Timer.wait_time = loose_health_time
 	
 func _input(event: InputEvent) -> void:
 	if !is_possessing:
@@ -89,9 +96,9 @@ func update_health() -> void:
 	if current_health <= 0:
 		current_health = 0
 	if is_possessing:
-		current_health -= 0
+		current_health -= time_damage_possessing
 	else:
-		current_health -= 5
+		current_health -= time_damage
 	healthChanged.emit()
 	
 	
@@ -102,7 +109,12 @@ func shoot_fireball():
 	var mouse_pos = get_global_mouse_position()
 	$Marker2D.look_at(mouse_pos)
 	
-	if Input.is_action_just_pressed("shoot") and fireball_unlocked:
+	if Input.is_action_just_pressed("shoot") and fireball_unlocked and !shoot_cooldown:
+		shoot_cooldown = true
+		shoot_cooldown_timer.wait_time = shoot_cooldown_time
+		shoot_cooldown_timer.start()
+		current_health -= fireball_cost
+		healthChanged.emit()
 		var projectile_instance = projectile.instantiate()
 		projectile_instance.rotation = $Marker2D.rotation
 		projectile_instance.global_position = $Marker2D.global_position
@@ -119,3 +131,7 @@ func shoot_fireball():
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.get_animation() == "Attacking":
 		animation_locked = false
+
+
+func _on_shoot_cooldown_timer_timeout() -> void:
+	shoot_cooldown = false
