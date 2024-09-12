@@ -4,6 +4,7 @@ signal healthChanged
 signal start_possess
 signal stop_possess
 
+@onready var water_enemy : PackedScene = preload("res://scenes/water_enemy.tscn")
 @onready var projectile : PackedScene = preload("res://scenes/projectile.tscn")
 @onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var player_lumberjack : CharacterBody2D = %Player_Lumberjack
@@ -17,6 +18,7 @@ signal stop_possess
 @export var fireball_cost : int
 @export var time_damage : int
 @export var time_damage_possessing : int
+@export var spawn_enemy_interval : float
 
 var shoot_cooldown : bool = false
 var input_direction : Vector2 = Vector2.ZERO
@@ -28,6 +30,7 @@ func _ready() -> void:
 	player_lumberjack.get_possessed.connect(set_is_possessing)
 	player_lumberjack.not_possessed.connect(release_lumberjack)
 	$Timer.wait_time = loose_health_time
+	$Spawn_Enemy.wait_time = spawn_enemy_interval
 	
 func _input(event: InputEvent) -> void:
 	if !is_possessing:
@@ -42,7 +45,6 @@ func _physics_process(delta: float) -> void:
 		update_animation()
 		
 	set_visability()
-	
 	
 func movement():
 	
@@ -75,7 +77,6 @@ func release_lumberjack():
 	set_is_possessing()
 	%Player_Cam.set_to_follow(self)
 
-			
 func set_is_possessing():
 	if !is_possessing:
 		start_possess.emit()
@@ -101,7 +102,6 @@ func update_health() -> void:
 		current_health -= time_damage
 	healthChanged.emit()
 	
-	
 func _on_timer_timeout() -> void:
 	update_health()
 	
@@ -126,12 +126,24 @@ func shoot_fireball():
 		elif mouse_pos.x - position.x < 0:
 			animated_sprite.flip_h = true
 	
-
-
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.get_animation() == "Attacking":
 		animation_locked = false
 
-
 func _on_shoot_cooldown_timer_timeout() -> void:
 	shoot_cooldown = false
+	
+func spawn_enemy() -> void:
+	if %Enemies.get_child_count() < 10:
+		var random = RandomNumberGenerator.new()
+		random.randomize()
+		$Path2D/PathFollow2D.progress_ratio = random.randf_range(0, 1)
+		
+		var water_enemy_instance = water_enemy.instantiate()
+		water_enemy_instance.global_position = %Enemy_Spawn_Postition.global_position
+		%Enemies.add_child(water_enemy_instance)
+	
+
+
+func _on_spawn_enemy_timeout() -> void:
+	spawn_enemy()

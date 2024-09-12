@@ -4,9 +4,13 @@ extends StaticBody2D
 @onready var label : Label = $Label
 @onready var log : PackedScene = preload("res://scenes/log.tscn")
 
+@export var max_health : int = 3
+
 var text_percent_visible : float = 0.0
 var text_length : int = 15
 var player_in_area : bool = false
+var current_health : int = 3
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -41,11 +45,13 @@ func _on_timer_timeout() -> void:
 func chop_down() -> void:
 	if player_in_area == true:
 		if %Player_Lumberjack.is_possessed:
-			if Input.is_action_just_pressed("interact"):
-				var new_log_scene = log.instantiate()
-				%Trees.call_deferred("add_child", new_log_scene)
-				new_log_scene.position = position
-				queue_free()
+			if Input.is_action_just_pressed("shoot"):
+				current_health -= 1
+				if current_health <= 0:
+					var new_log_scene = log.instantiate()
+					%Trees.call_deferred("add_child", new_log_scene)
+					new_log_scene.position = position
+					queue_free()
 				
 			
 			

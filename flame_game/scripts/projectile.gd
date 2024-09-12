@@ -14,6 +14,6 @@ func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
 	queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
-	if "current_health" in body:
+	if "player_position" in body:
 		body.current_health -= damage
 	queue_free()

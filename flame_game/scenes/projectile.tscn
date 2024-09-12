@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://hbufgmhlf1hk"]
+[gd_scene load_steps=12 format=3 uid="uid://hbufgmhlf1hk"]
 
 [ext_resource type="Texture2D" uid="uid://bqgkgv4uvweqq" path="res://assets/Fire Elemental 2/Monster Pack 37 (Elementals 2)/Spritesheets/Elemental Fire 2/Elemental_Fire_2_Projectile.png" id="1_1y3os"]
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="1_tpw14"]
+[ext_resource type="Texture2D" uid="uid://bdahgy5qfdvic" path="res://assets/Light/light.png" id="3_wwjt5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kdco7"]
 atlas = ExtResource("1_1y3os")
@@ -58,6 +59,7 @@ radius = 6.0
 height = 18.0
 
 [node name="Projectile" type="Area2D"]
+collision_mask = 11
 script = ExtResource("1_tpw14")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -73,6 +75,12 @@ shape = SubResource("CapsuleShape2D_1cewq")
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(-0.5, 1)
 scale = Vector2(0.15, 0.6)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0.266667, 0.105882, 1)
+energy = 0.6
+texture = ExtResource("3_wwjt5")
+texture_scale = 0.3
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

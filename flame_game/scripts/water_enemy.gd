@@ -1,12 +1,12 @@
 extends CharacterBody2D
 
-@onready var player : CharacterBody2D = %Player_Fire
+@onready var player : CharacterBody2D
 @onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var shoot_cooldown_timer : Timer = $ShootCooldownTimer
 @onready var projectile : PackedScene = preload("res://scenes/projectile_water.tscn")
 
 @export var speed : float = 300.0
-@export var stop_range : float = 5.0
+@export var stop_range : float = 70.0
 @export var maxHealth : int = 30
 @export var shoot_cooldown_time : float = 1.5
 
@@ -18,6 +18,8 @@ var shoot_cooldown : bool = false
 var animation_locked : bool = false
 
 func _ready() -> void:
+	player = get_node("../../Player_Fire")
+	print(player)
 	player.start_possess.connect(set_follow_player)
 	player.stop_possess.connect(set_follow_player)
 
@@ -50,7 +52,7 @@ func check_health():
 		queue_free()
 
 func shoot_water():
-	if !shoot_cooldown:
+	if !shoot_cooldown and follow_player:
 		var player_pos = player.position
 		$Marker2D.look_at(player_pos)
 		
@@ -60,7 +62,7 @@ func shoot_water():
 		var projectile_instance = projectile.instantiate()
 		projectile_instance.rotation = $Marker2D.rotation
 		projectile_instance.global_position = $Marker2D.global_position
-		%Projectiles.add_child(projectile_instance)
+		get_node("../../Projectiles").add_child(projectile_instance)
 		animation_locked = true
 		animated_sprite.play("Attacking")
 		if player_pos.x - position.x > 0:
