@@ -52,7 +52,6 @@ func check_health():
 func shoot_water():
 	if !shoot_cooldown:
 		var player_pos = player.position
-		print(player_pos)
 		$Marker2D.look_at(player_pos)
 		
 		shoot_cooldown = true
