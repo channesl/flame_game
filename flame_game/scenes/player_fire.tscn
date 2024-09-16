@@ -189,16 +189,17 @@ autostart = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(1, 0.557935, 0.103285, 1)
-energy = 0.6
+energy = 0.8
 shadow_enabled = true
-shadow_filter = 1
-shadow_filter_smooth = 5.0
+shadow_filter = 2
+shadow_filter_smooth = 1.0
 texture = ExtResource("5_jddac")
 texture_scale = 1.5
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
-color = Color(1, 0.266667, 0.105882, 1)
-energy = 0.6
+color = Color(1, 0.556863, 0.101961, 1)
+energy = 1.2
+range_item_cull_mask = 2
 shadow_filter = 1
 shadow_filter_smooth = 50.0
 texture = ExtResource("5_jddac")

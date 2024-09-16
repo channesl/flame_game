@@ -49,6 +49,7 @@ func set_follow_player():
 	
 func check_health():
 	if current_health <= 0:
+		player.current_xp += 5
 		queue_free()
 
 func shoot_water():

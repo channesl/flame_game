@@ -25,6 +25,7 @@ var input_direction : Vector2 = Vector2.ZERO
 var animation_locked : bool = false
 var is_possessing : bool = false
 var fireball_unlocked : bool = true
+var current_xp : int = 0
 
 func _ready() -> void:
 	player_lumberjack.get_possessed.connect(set_is_possessing)
@@ -134,7 +135,7 @@ func _on_shoot_cooldown_timer_timeout() -> void:
 	shoot_cooldown = false
 	
 func spawn_enemy() -> void:
-	if %Enemies.get_child_count() < 10:
+	if %Enemies.get_child_count() < 5:
 		var random = RandomNumberGenerator.new()
 		random.randomize()
 		$Path2D/PathFollow2D.progress_ratio = random.randf_range(0, 1)
