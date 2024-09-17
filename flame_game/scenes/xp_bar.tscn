@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvcftl0gyr2vt"]
+
+[ext_resource type="Texture2D" uid="uid://cde4xbxhsksdb" path="res://assets/Fire Bar/xp_inner.png" id="1_qkb30"]
+[ext_resource type="Texture2D" uid="uid://l44ope43ktwk" path="res://assets/Fire Bar/xp_outer.png" id="2_n0e6i"]
+[ext_resource type="Script" path="res://scenes/xp_bar.gd" id="3_nj1w2"]
+
+[node name="Xp_Bar" type="TextureProgressBar"]
+offset_right = 3.0
+offset_bottom = 3.0
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_top = 1
+stretch_margin_right = 1
+stretch_margin_bottom = 1
+texture_under = ExtResource("1_qkb30")
+texture_over = ExtResource("2_n0e6i")
+texture_progress = ExtResource("1_qkb30")
+tint_under = Color(0.192157, 0.192157, 0.192157, 1)
+tint_over = Color(0.114897, 0.114897, 0.114897, 1)
+tint_progress = Color(0.188235, 1, 0.415686, 1)
+script = ExtResource("3_nj1w2")

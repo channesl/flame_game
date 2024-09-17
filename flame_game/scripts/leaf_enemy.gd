@@ -1,9 +1,10 @@
 extends CharacterBody2D
 
+@onready var lumberjack : CharacterBody2D
 @onready var player : CharacterBody2D
 @onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var shoot_cooldown_timer : Timer = $ShootCooldownTimer
-@onready var projectile : PackedScene = preload("res://scenes/projectile_water.tscn")
+@onready var projectile : PackedScene = preload("res://scenes/projectile_leaf.tscn")
 
 @export var speed : float = 300.0
 @export var stop_range : float = 70.0
@@ -18,6 +19,7 @@ var shoot_cooldown : bool = false
 var animation_locked : bool = false
 
 func _ready() -> void:
+	lumberjack = get_node("../../Player_Lumberjack")
 	player = get_node("../../Player_Fire")
 	#player.start_possess.connect(set_follow_player)
 	#player.stop_possess.connect(set_follow_player)
@@ -26,11 +28,11 @@ func _physics_process(delta: float) -> void:
 	move_to_player()
 	update_facing_direction()
 	check_health()
-	shoot_water()
+	shoot_leaf()
 	set_follow_player()
 	
 func move_to_player():
-	player_position = player.position
+	player_position = lumberjack.position
 	target_position = (player_position - position).normalized()
 	
 	if follow_player:
@@ -45,7 +47,7 @@ func update_facing_direction():
 		animated_sprite.flip_h = true
 		
 func set_follow_player():
-	follow_player = not player.is_possessing
+	follow_player = lumberjack.is_possessed
 	
 func check_health():
 	if current_health <= 0:
@@ -53,10 +55,10 @@ func check_health():
 		player.xpChanged.emit()
 		queue_free()
 
-func shoot_water():
+func shoot_leaf():
 	if !shoot_cooldown and follow_player:
-		var player_pos = player.position
-		$Marker2D.look_at(player_pos)
+		var player_pos = lumberjack.position
+		$Marker2D.look_at(player_pos- Vector2(0, -5))
 		
 		shoot_cooldown = true
 		shoot_cooldown_timer.wait_time = shoot_cooldown_time
@@ -74,10 +76,13 @@ func shoot_water():
 	
 
 
-func _on_animated_sprite_2d_animation_finished() -> void:
-	if animated_sprite.get_animation() == "Attacking":
-		animation_locked = false
+
 
 
 func _on_shoot_cooldown_timer_timeout() -> void:
 	shoot_cooldown = false
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if animated_sprite.get_animation() == "Attacking":
+		animation_locked = false

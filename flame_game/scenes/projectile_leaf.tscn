@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7jsgdls0mhu7"]
+
+[ext_resource type="Script" path="res://scripts/projectile_leaf.gd" id="1_hndkh"]
+[ext_resource type="Texture2D" uid="uid://d0jhn2fo1mg1y" path="res://assets/Leaf_elemental/Monster Pack 58 (Plants 3)/Spritesheets/Plant Leafer/Plant_Leafer_Projectile.png" id="1_taen6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ufsce"]
+radius = 3.0
+height = 10.0
+
+[node name="Projectile_Leaf" type="Area2D"]
+collision_mask = 3
+script = ExtResource("1_hndkh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_taen6")
+region_enabled = true
+region_rect = Rect2(36, 2, 7, 11)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ufsce")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

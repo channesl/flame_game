@@ -3,6 +3,7 @@ extends StaticBody2D
 
 @onready var label : Label = $Label
 @onready var log : PackedScene = preload("res://scenes/log.tscn")
+@onready var leaf_enemy : PackedScene = preload("res://scenes/leaf_enemy.tscn")
 
 @export var max_health : int = 3
 
@@ -46,12 +47,21 @@ func chop_down() -> void:
 	if player_in_area == true:
 		if %Player_Lumberjack.is_possessed:
 			if Input.is_action_just_pressed("shoot"):
-				current_health -= 1
-				if current_health <= 0:
-					var new_log_scene = log.instantiate()
-					%Trees.call_deferred("add_child", new_log_scene)
-					new_log_scene.position = position
-					queue_free()
+				if %Player_Lumberjack.chop_tree():
+					current_health -= 1
+					if current_health <= 0:
+						var random = RandomNumberGenerator.new()
+						random.randomize()
+						var rand = random.randf_range(0, 1)
+						if rand < 0.1:
+							var new_log_scene = log.instantiate()
+							%Trees.call_deferred("add_child", new_log_scene)
+							new_log_scene.position = position
+						else:
+							var new_leaf_scene = leaf_enemy.instantiate()
+							%Enemies.call_deferred("add_child", new_leaf_scene)
+							new_leaf_scene.position = position
+						queue_free()
 				
 			
 			

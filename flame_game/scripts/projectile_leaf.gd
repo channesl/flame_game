@@ -14,10 +14,6 @@ func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
 	queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
-	if !"target_position" in body:
-		if "fireball_unlocked" in body:
-			if !body.is_possessing:
-				body.current_health -= damage
-			else:
-				return
-		queue_free()
+	if "is_possessed" in body:
+		body.expell_fire()
+	queue_free()

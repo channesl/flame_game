@@ -1,7 +1,25 @@
-[gd_scene load_steps=18 format=3 uid="uid://ca1dnr517d2qy"]
+[gd_scene load_steps=36 format=3 uid="uid://ca1dnr517d2qy"]
 
 [ext_resource type="Texture2D" uid="uid://vac4gpwl2lmk" path="res://assets/mystic_woods/characters/player.png" id="1_3kj32"]
 [ext_resource type="Script" path="res://scripts/player_lumberjack.gd" id="1_rjy8c"]
+[ext_resource type="Texture2D" uid="uid://cvrklfojmogch" path="res://assets/mystic_woods/characters/player-possessed.png" id="2_vqaow"]
+[ext_resource type="Texture2D" uid="uid://bdahgy5qfdvic" path="res://assets/Light/light.png" id="4_muef2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sd0mc"]
+atlas = ExtResource("2_vqaow")
+region = Rect2(0, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kc00s"]
+atlas = ExtResource("2_vqaow")
+region = Rect2(48, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgvw3"]
+atlas = ExtResource("2_vqaow")
+region = Rect2(96, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1klj8"]
+atlas = ExtResource("2_vqaow")
+region = Rect2(144, 336, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aklrq"]
 atlas = ExtResource("1_3kj32")
@@ -25,6 +43,30 @@ region = Rect2(192, 48, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0rkdp"]
 atlas = ExtResource("1_3kj32")
+region = Rect2(240, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbk8o"]
+atlas = ExtResource("2_vqaow")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2pi0"]
+atlas = ExtResource("2_vqaow")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mb0m"]
+atlas = ExtResource("2_vqaow")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lutod"]
+atlas = ExtResource("2_vqaow")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t221p"]
+atlas = ExtResource("2_vqaow")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktjom"]
+atlas = ExtResource("2_vqaow")
 region = Rect2(240, 48, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_csa6e"]
@@ -51,8 +93,49 @@ region = Rect2(192, 192, 48, 48)
 atlas = ExtResource("1_3kj32")
 region = Rect2(240, 192, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cgvd"]
+atlas = ExtResource("2_vqaow")
+region = Rect2(0, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcnpr"]
+atlas = ExtResource("2_vqaow")
+region = Rect2(48, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1gx0"]
+atlas = ExtResource("2_vqaow")
+region = Rect2(96, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpdv0"]
+atlas = ExtResource("2_vqaow")
+region = Rect2(144, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_moo1g"]
+atlas = ExtResource("2_vqaow")
+region = Rect2(192, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s1ur"]
+atlas = ExtResource("2_vqaow")
+region = Rect2(240, 192, 48, 48)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_lidx1"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sd0mc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kc00s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgvw3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1klj8")
+}],
+"loop": false,
+"name": &"Chopping",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_aklrq")
@@ -78,6 +161,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_wbk8o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2pi0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mb0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lutod")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t221p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ktjom")
+}],
+"loop": true,
+"name": &"Idle_Possessed",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_csa6e")
 }, {
 "duration": 1.0,
@@ -98,6 +204,29 @@ animations = [{
 "loop": true,
 "name": &"Running",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cgvd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vcnpr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l1gx0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpdv0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_moo1g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s1ur")
+}],
+"loop": true,
+"name": &"Running_Possessed",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8j1bl"]
@@ -107,15 +236,14 @@ radius = 5.0
 radius = 35.0143
 
 [node name="Player_Lumberjack" type="CharacterBody2D"]
+position = Vector2(0, -9)
 collision_layer = 2
 script = ExtResource("1_rjy8c")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_lidx1")
-animation = &"Running"
+animation = &"Idle"
 autoplay = "Idle"
-frame = 4
-frame_progress = 0.981694
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 12)
@@ -128,5 +256,34 @@ collision_mask = 4
 position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_uswot")
 
+[node name="Chop_Cooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="Runaway_Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+enabled = false
+color = Color(1, 0.557935, 0.103285, 1)
+energy = 0.4
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 1.0
+texture = ExtResource("4_muef2")
+texture_scale = 1.5
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+enabled = false
+color = Color(1, 0.556863, 0.101961, 1)
+energy = 0.6
+range_item_cull_mask = 2
+shadow_filter = 1
+shadow_filter_smooth = 50.0
+texture = ExtResource("4_muef2")
+texture_scale = 1.5
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Chop_Cooldown" to="." method="_on_chop_cooldown_timeout"]
+[connection signal="timeout" from="Runaway_Timer" to="." method="_on_runaway_timer_timeout"]

@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 @export var added_health : int
-
+@export var added_xp : int
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -16,4 +16,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if !body.get_is_possessing():
 		body.current_health += added_health
 		body.healthChanged.emit()
+		body.current_xp += added_xp
+		body.xpChanged.emit()
 		queue_free()

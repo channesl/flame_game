@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal healthChanged
+signal xpChanged
 signal start_possess
 signal stop_possess
 
@@ -13,18 +14,28 @@ signal stop_possess
 
 @export var movement_speed : float
 @export var max_health : int
+@export var spawn_enemy_interval : float
+
+@export_subgroup("Fireball")
 @export var shoot_cooldown_time : float
-@export var loose_health_time : float
 @export var fireball_cost : int
+
+@export_subgroup("Time Damage")
 @export var time_damage : int
 @export var time_damage_possessing : int
-@export var spawn_enemy_interval : float
+@export var loose_health_time : float
+
+@export_subgroup("Level Caps")
+@export var level_1 : int
+@export var level_2 : int
+@export var level_3 : int
 
 var shoot_cooldown : bool = false
 var input_direction : Vector2 = Vector2.ZERO
 var animation_locked : bool = false
 var is_possessing : bool = false
 var fireball_unlocked : bool = true
+var current_level : int = 0
 var current_xp : int = 0
 
 func _ready() -> void:
@@ -44,8 +55,10 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		update_facing_direction()
 		update_animation()
+		update_particles()
 		
 	set_visability()
+	check_xp()
 	
 func movement():
 	
@@ -60,14 +73,14 @@ func movement():
 
 func update_facing_direction():
 	if not animation_locked:
-		if input_direction.x > 0:
+		if velocity.x > 0:
 			animated_sprite.flip_h = false
-		elif input_direction.x < 0:
+		elif velocity.x < 0:
 			animated_sprite.flip_h = true
 
 func update_animation():
 	if not animation_locked:
-		if input_direction != Vector2.ZERO:
+		if velocity != Vector2.ZERO:
 			animated_sprite.play("Running")
 		else:
 			animated_sprite.play("Idle")
@@ -77,6 +90,7 @@ func release_lumberjack():
 	stop_possess.emit()
 	set_is_possessing()
 	%Player_Cam.set_to_follow(self)
+	player_lumberjack.runaway()
 
 func set_is_possessing():
 	if !is_possessing:
@@ -135,7 +149,7 @@ func _on_shoot_cooldown_timer_timeout() -> void:
 	shoot_cooldown = false
 	
 func spawn_enemy() -> void:
-	if %Enemies.get_child_count() < 5:
+	if %Enemies.get_child_count() < 5 and current_level > 0:
 		var random = RandomNumberGenerator.new()
 		random.randomize()
 		$Path2D/PathFollow2D.progress_ratio = random.randf_range(0, 1)
@@ -145,6 +159,26 @@ func spawn_enemy() -> void:
 		%Enemies.add_child(water_enemy_instance)
 	
 
-
 func _on_spawn_enemy_timeout() -> void:
 	spawn_enemy()
+	
+func check_xp():
+	if current_level == 0:
+		if current_xp >= level_1:
+			current_level = 1
+			current_xp -= level_1
+			xpChanged.emit()
+	if current_level == 1:
+		if current_xp >= level_2:
+			current_level = 2
+			current_xp -= level_2
+			xpChanged.emit()
+	if current_level == 2:
+		if current_xp >= level_3:
+			current_level = 3
+			current_xp -= level_3
+			xpChanged.emit()
+			
+func update_particles():
+	var particle_direction = (player_lumberjack.position - position).normalized()
+	$CPUParticles2D.direction = particle_direction

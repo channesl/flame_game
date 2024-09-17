@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://doqdkwnqc2a47"]
+[gd_scene load_steps=26 format=3 uid="uid://doqdkwnqc2a47"]
 
 [ext_resource type="Script" path="res://scripts/player_fire.gd" id="1_yrmfs"]
 [ext_resource type="Texture2D" uid="uid://cmrne26v3e3i" path="res://assets/Fire Elemental 2/Monster Pack 37 (Elementals 2)/Spritesheets/Elemental Fire 2/Elemental_Fire_2_Idle.png" id="2_j7in3"]
@@ -145,17 +145,24 @@ _data = {
 }
 point_count = 5
 
+[sub_resource type="Gradient" id="Gradient_gkbdv"]
+offsets = PackedFloat32Array(0, 0.509615, 0.754808, 0.980769)
+colors = PackedColorArray(0.933333, 0.960784, 0.419608, 1, 0.972549, 0.25098, 0.105882, 1, 0.6, 0.0666667, 0, 1, 0, 0, 0, 1)
+
 [node name="Player_Fire" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_yrmfs")
 movement_speed = 150.0
 max_health = 100
-shoot_cooldown_time = 1.5
-loose_health_time = 0.5
+spawn_enemy_interval = 20.0
+shoot_cooldown_time = 0.5
 fireball_cost = 5
 time_damage = 2
 time_damage_possessing = 1
-spawn_enemy_interval = 20.0
+loose_health_time = 0.5
+level_1 = 100
+level_2 = 150
+level_3 = 200
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_34vdd")
@@ -204,6 +211,18 @@ shadow_filter = 1
 shadow_filter_smooth = 50.0
 texture = ExtResource("5_jddac")
 texture_scale = 1.5
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 20
+lifetime = 0.8
+randomness = 0.3
+emission_shape = 1
+emission_sphere_radius = 6.0
+spread = 9.85
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.63
+initial_velocity_max = 54.69
+color_ramp = SubResource("Gradient_gkbdv")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
