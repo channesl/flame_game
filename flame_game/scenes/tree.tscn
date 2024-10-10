@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8a563eusn7r2"]
+[gd_scene load_steps=6 format=3 uid="uid://b8a563eusn7r2"]
 
 [ext_resource type="Texture2D" uid="uid://b8pyj7igst01q" path="res://assets/mystic_woods/objects/objects.png" id="1_fmv4n"]
 [ext_resource type="Script" path="res://scripts/tree.gd" id="1_utabf"]
-[ext_resource type="FontFile" uid="uid://1jkqlh4v7k81" path="res://assets/fonts/Tiny5/Tiny5-Regular.ttf" id="3_y10r3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xl36l"]
 radius = 11.0
@@ -16,54 +15,39 @@ cull_mode = 2
 polygon = PackedVector2Array(0, 9, -11, 11, -12, 22, -6, 26, 10, 26, 12, 21, 12, 18, 10, 12, 7, 10)
 
 [node name="Tree" type="StaticBody2D"]
+y_sort_enabled = true
+collision_layer = 16
+input_pickable = true
 script = ExtResource("1_utabf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2
 texture = ExtResource("1_fmv4n")
+offset = Vector2(0, -25)
 region_enabled = true
 region_rect = Rect2(0, 79, 48, 66)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 14)
+position = Vector2(0, -10)
 shape = SubResource("CapsuleShape2D_xl36l")
 
 [node name="Area2D" type="Area2D" parent="."]
 y_sort_enabled = true
+position = Vector2(0, -24)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 15)
 shape = SubResource("CircleShape2D_gdcpu")
 
-[node name="Label" type="Label" parent="."]
-z_index = 20
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -31.25
-offset_top = 5.0
-offset_right = 93.75
-offset_bottom = 28.0
-grow_horizontal = 2
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("3_y10r3")
-theme_override_font_sizes/font_size = 8
-text = "[F] TO INTERACT"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Timer" type="Timer" parent="Label"]
-wait_time = 0.01
-autostart = true
-
 [node name="Chop_Timer" type="Timer" parent="."]
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
 position = Vector2(-1, 0)
 occluder = SubResource("OccluderPolygon2D_ajx1a")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
-[connection signal="timeout" from="Label/Timer" to="." method="_on_timer_timeout"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

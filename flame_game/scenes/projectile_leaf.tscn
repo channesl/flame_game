@@ -8,7 +8,7 @@ radius = 3.0
 height = 10.0
 
 [node name="Projectile_Leaf" type="Area2D"]
-collision_mask = 3
+collision_mask = 18
 script = ExtResource("1_hndkh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

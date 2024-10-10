@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcvhio2oowvid"]
+
+[ext_resource type="Texture2D" uid="uid://m7vvrsxfudw3" path="res://assets/Ent Boss/Leaf Elemental Sprite Sheet.png" id="1_flvqq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhu1r"]
+atlas = ExtResource("1_flvqq")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xe4h2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhu1r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Boss" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xe4h2")

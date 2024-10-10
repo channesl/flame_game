@@ -153,6 +153,7 @@ animations = [{
 radius = 6.0
 
 [node name="Leaf_Enemy" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_layer = 8
 script = ExtResource("1_rv1em")
 speed = 50.0
@@ -162,12 +163,14 @@ sprite_frames = SubResource("SpriteFrames_duxp6")
 animation = &"Attacking"
 autoplay = "Idle"
 frame_progress = 0.864068
+offset = Vector2(0, -13)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 1)
+position = Vector2(3, -12)
 shape = SubResource("CircleShape2D_elrpa")
 
 [node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -13)
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 

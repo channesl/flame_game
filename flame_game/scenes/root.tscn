@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://rmjjlhuy6ovx"]
+
+[ext_resource type="Texture2D" uid="uid://c3lvkbdapk8yo" path="res://assets/Ent Boss/Roots.png" id="1_3nch5"]
+[ext_resource type="Script" path="res://scenes/root.gd" id="1_62qv7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjwpj"]
+atlas = ExtResource("1_3nch5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjuqb"]
+atlas = ExtResource("1_3nch5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8wgh"]
+atlas = ExtResource("1_3nch5")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1eth"]
+atlas = ExtResource("1_3nch5")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uks3t"]
+atlas = ExtResource("1_3nch5")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_84t6h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjwpj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjuqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8wgh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l1eth")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uks3t")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rp5fg"]
+radius = 7.0
+height = 16.0
+
+[node name="Root" type="StaticBody2D"]
+script = ExtResource("1_62qv7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_84t6h")
+frame = 4
+frame_progress = 1.0
+offset = Vector2(0, -15)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -6)
+shape = SubResource("CapsuleShape2D_rp5fg")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

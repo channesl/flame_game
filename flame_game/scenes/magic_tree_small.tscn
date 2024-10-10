@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4h0df41k4j7n"]
+
+[ext_resource type="Script" path="res://scripts/tree.gd" id="1_4i5db"]
+[ext_resource type="Texture2D" uid="uid://pvbq1yqql1tx" path="res://assets/Magic tree/Magic_tree_small.png" id="2_c3tin"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xl36l"]
+radius = 11.0
+height = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gdcpu"]
+radius = 34.0147
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ajx1a"]
+cull_mode = 2
+polygon = PackedVector2Array(0, 9, -11, 11, -12, 22, -6, 26, 10, 26, 12, 21, 12, 18, 10, 12, 7, 10)
+
+[node name="Magic_Tree_Small" type="StaticBody2D"]
+y_sort_enabled = true
+collision_layer = 16
+input_pickable = true
+script = ExtResource("1_4i5db")
+max_health = 10
+is_magic = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 2
+texture = ExtResource("2_c3tin")
+offset = Vector2(0, -25)
+region_enabled = true
+region_rect = Rect2(0, 0, 47, 64)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+self_modulate = Color(3, 3, 3, 1)
+texture = ExtResource("2_c3tin")
+offset = Vector2(0, -25)
+region_enabled = true
+region_rect = Rect2(47, 0, 49, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("CapsuleShape2D_xl36l")
+
+[node name="Area2D" type="Area2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -24)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 15)
+shape = SubResource("CircleShape2D_gdcpu")
+
+[node name="Chop_Timer" type="Timer" parent="."]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
+position = Vector2(-1, 0)
+occluder = SubResource("OccluderPolygon2D_ajx1a")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

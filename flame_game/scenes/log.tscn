@@ -9,7 +9,7 @@ height = 28.0
 
 [node name="Log" type="StaticBody2D"]
 script = ExtResource("1_2qw4e")
-added_health = 100
+added_health = 50
 added_xp = 5
 
 [node name="Area2D" type="Area2D" parent="."]

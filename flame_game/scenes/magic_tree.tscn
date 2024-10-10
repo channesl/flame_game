@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdb1pwf5ap8do"]
+
+[ext_resource type="Texture2D" uid="uid://bkbq0b2ybhhhp" path="res://assets/Magic tree/Magic_tree.png" id="1_m17tf"]
+[ext_resource type="Texture2D" uid="uid://bdahgy5qfdvic" path="res://assets/Light/light.png" id="2_enk76"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8eram"]
+radius = 22.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cn5pk"]
+cull_mode = 2
+polygon = PackedVector2Array(-2, -1, -19, 0, -23, 5, -23, 21, -17, 24, -13, 26, 10, 26, 19, 26, 23, 18, 23, 11, 17, 3, 15, -1)
+
+[node name="Magic_Tree" type="StaticBody2D"]
+y_sort_enabled = true
+collision_layer = 16
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_m17tf")
+offset = Vector2(0, -54)
+region_enabled = true
+region_rect = Rect2(4, 4, 87, 112)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+self_modulate = Color(3, 3, 3, 1)
+texture = ExtResource("1_m17tf")
+offset = Vector2(0, -54)
+region_enabled = true
+region_rect = Rect2(211, 4, 89, 112)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -19)
+shape = SubResource("CircleShape2D_8eram")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
+position = Vector2(1, 30)
+occluder = SubResource("OccluderPolygon2D_cn5pk")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(1, 31)
+color = Color(0.654902, 0.235294, 1, 1)
+energy = 0.77
+texture = ExtResource("2_enk76")

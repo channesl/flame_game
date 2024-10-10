@@ -59,7 +59,7 @@ radius = 6.0
 height = 18.0
 
 [node name="Projectile" type="Area2D"]
-collision_mask = 11
+collision_mask = 26
 script = ExtResource("1_tpw14")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

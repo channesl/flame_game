@@ -1,0 +1,340 @@
+[gd_scene load_steps=46 format=3 uid="uid://dhd0p0t52t27g"]
+
+[ext_resource type="Texture2D" uid="uid://cfb8eteyog5de" path="res://assets/UI/Logo.png" id="1_kj6t1"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_t60uu"]
+[ext_resource type="FontFile" uid="uid://dma36ayybtqgh" path="res://assets/fonts/alagard/alagard.ttf" id="2_aomc8"]
+[ext_resource type="Texture2D" uid="uid://vac4gpwl2lmk" path="res://assets/mystic_woods/characters/player.png" id="3_56hrx"]
+[ext_resource type="Texture2D" uid="uid://tulgkcrhbsd6" path="res://assets/Campfire/F500-1.PNG" id="4_dvtq2"]
+[ext_resource type="Texture2D" uid="uid://b4sipu74k1c4" path="res://assets/Campfire/F500-2.PNG" id="5_efqcj"]
+[ext_resource type="Texture2D" uid="uid://vvgo0r4o8sr2" path="res://assets/Campfire/F500-3.PNG" id="6_y6i6w"]
+[ext_resource type="Texture2D" uid="uid://bv5iuv47jnfxq" path="res://assets/Campfire/F500-4.PNG" id="7_xd1dm"]
+[ext_resource type="Texture2D" uid="uid://de6ygm4h7ifvn" path="res://assets/Campfire/F500-5.PNG" id="8_cyl2f"]
+[ext_resource type="Texture2D" uid="uid://bet5ji3fbvkng" path="res://assets/Campfire/F500-6.PNG" id="9_ym0jn"]
+[ext_resource type="Texture2D" uid="uid://nmmjmt8l678l" path="res://assets/Campfire/F500-7.PNG" id="10_ucmt4"]
+[ext_resource type="Texture2D" uid="uid://b6hf4cnsyw1lu" path="res://assets/Campfire/F500-8.PNG" id="11_d228i"]
+[ext_resource type="Texture2D" uid="uid://cr31cnhtoy02p" path="res://assets/Campfire/F500-9.PNG" id="12_cos7c"]
+[ext_resource type="Texture2D" uid="uid://dm44vqb6ycf4j" path="res://assets/Campfire/F500-10.PNG" id="13_5fqcj"]
+[ext_resource type="Texture2D" uid="uid://d13xami1dudnp" path="res://assets/Campfire/F500-11.PNG" id="14_dlbc4"]
+[ext_resource type="Texture2D" uid="uid://rvywc5p4fpdm" path="res://assets/Campfire/F500-12.PNG" id="15_d8t6n"]
+[ext_resource type="Texture2D" uid="uid://bdahgy5qfdvic" path="res://assets/Light/light.png" id="16_whj4i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m25a7"]
+atlas = ExtResource("3_56hrx")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1tqe"]
+atlas = ExtResource("3_56hrx")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgw6n"]
+atlas = ExtResource("3_56hrx")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qu2nj"]
+atlas = ExtResource("3_56hrx")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8m0u"]
+atlas = ExtResource("3_56hrx")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34oxj"]
+atlas = ExtResource("3_56hrx")
+region = Rect2(240, 48, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0krvv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m25a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1tqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xgw6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qu2nj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8m0u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34oxj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ouqlx"]
+atlas = ExtResource("4_dvtq2")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eklj3"]
+atlas = ExtResource("5_efqcj")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhcho"]
+atlas = ExtResource("6_y6i6w")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4caek"]
+atlas = ExtResource("7_xd1dm")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i61cc"]
+atlas = ExtResource("8_cyl2f")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nbfg"]
+atlas = ExtResource("9_ym0jn")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umqc3"]
+atlas = ExtResource("10_ucmt4")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqugp"]
+atlas = ExtResource("11_d228i")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6k1j3"]
+atlas = ExtResource("12_cos7c")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vry6"]
+atlas = ExtResource("13_5fqcj")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqhkt"]
+atlas = ExtResource("14_dlbc4")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8poc"]
+atlas = ExtResource("15_d8t6n")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_upq7u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ouqlx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eklj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhcho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4caek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i61cc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3nbfg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umqc3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqugp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6k1j3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vry6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqhkt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8poc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_no8se"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iclxf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oh5uu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kfxfp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2syn6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_drel2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4goq1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8y874"]
+
+[node name="Main_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t60uu")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.266575, 0.266575, 0.266575, 1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0980392, 0.239216, 0.247059, 1)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D"]
+position = Vector2(1399, 456)
+scale = Vector2(20, 20)
+sprite_frames = SubResource("SpriteFrames_0krvv")
+autoplay = "default"
+frame = 4
+frame_progress = 0.537152
+flip_h = true
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Node2D"]
+position = Vector2(1062, 688)
+sprite_frames = SubResource("SpriteFrames_upq7u")
+autoplay = "default"
+frame = 2
+frame_progress = 0.57563
+
+[node name="PointLight2D" type="PointLight2D" parent="Node2D"]
+position = Vector2(1096, 750)
+scale = Vector2(5.875, 5.875)
+color = Color(0.984314, 0.572549, 0.168627, 1)
+energy = 0.89
+texture = ExtResource("16_whj4i")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 160
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 160
+theme_override_constants/margin_bottom = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Logo" type="TextureRect" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_kj6t1")
+expand_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_bottom = 40
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/MarginContainer/CenterContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Play_button" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_hover_color = Color(0.898039, 0.231373, 0.266667, 1)
+theme_override_colors/font_pressed_color = Color(0.898039, 0.231373, 0.266667, 1)
+theme_override_colors/font_focus_color = Color(0.898039, 0.231373, 0.266667, 1)
+theme_override_colors/font_color = Color(0.984314, 0.572549, 0.168627, 1)
+theme_override_fonts/font = ExtResource("2_aomc8")
+theme_override_font_sizes/font_size = 96
+theme_override_styles/focus = SubResource("StyleBoxEmpty_no8se")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_iclxf")
+text = "Play"
+flat = true
+alignment = 0
+
+[node name="Options_Button" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_hover_color = Color(0.898039, 0.231373, 0.266667, 1)
+theme_override_colors/font_pressed_color = Color(0.898039, 0.231373, 0.266667, 1)
+theme_override_colors/font_focus_color = Color(0.898039, 0.231373, 0.266667, 1)
+theme_override_colors/font_color = Color(0.984314, 0.572549, 0.168627, 1)
+theme_override_fonts/font = ExtResource("2_aomc8")
+theme_override_font_sizes/font_size = 96
+theme_override_styles/focus = SubResource("StyleBoxEmpty_oh5uu")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kfxfp")
+text = "Options"
+flat = true
+alignment = 0
+
+[node name="Credits_Button" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_hover_color = Color(0.898039, 0.231373, 0.266667, 1)
+theme_override_colors/font_pressed_color = Color(0.898039, 0.231373, 0.266667, 1)
+theme_override_colors/font_focus_color = Color(0.898039, 0.231373, 0.266667, 1)
+theme_override_colors/font_color = Color(0.984314, 0.572549, 0.168627, 1)
+theme_override_fonts/font = ExtResource("2_aomc8")
+theme_override_font_sizes/font_size = 96
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2syn6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_drel2")
+text = "Credits
+"
+flat = true
+alignment = 0
+
+[node name="Quit_Button" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_hover_color = Color(0.898039, 0.231373, 0.266667, 1)
+theme_override_colors/font_pressed_color = Color(0.898039, 0.231373, 0.266667, 1)
+theme_override_colors/font_focus_color = Color(0.898039, 0.231373, 0.266667, 1)
+theme_override_colors/font_color = Color(0.984314, 0.572549, 0.168627, 1)
+theme_override_fonts/font = ExtResource("2_aomc8")
+theme_override_font_sizes/font_size = 96
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4goq1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8y874")
+text = "Quit
+"
+flat = true
+alignment = 0
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.619608, 0.156863, 0.207843, 1)
+theme_override_fonts/font = ExtResource("2_aomc8")
+theme_override_font_sizes/font_size = 32
+text = "V 0.1
+Hannes Lindstrom"
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/Play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/Quit_Button" to="." method="_on_quit_button_pressed"]

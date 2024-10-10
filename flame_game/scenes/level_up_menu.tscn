@@ -1,0 +1,128 @@
+[gd_scene load_steps=8 format=3 uid="uid://8s3j8d3ui48y"]
+
+[ext_resource type="FontFile" uid="uid://dma36ayybtqgh" path="res://assets/fonts/alagard/alagard.ttf" id="1_cy20x"]
+[ext_resource type="Script" path="res://scripts/level_up_menu.gd" id="2_8psoq"]
+
+[sub_resource type="Theme" id="Theme_guer1"]
+default_font = ExtResource("1_cy20x")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ypf0"]
+bg_color = Color(0, 0, 0, 0.611765)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.984314, 0.572549, 0.168627, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_waows"]
+bg_color = Color(0, 0, 0, 0.611765)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.984314, 0.572549, 0.168627, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_22bu2"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0.321569)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4csmh"]
+bg_color = Color(0, 0, 0, 0.611765)
+
+[node name="Level_Up_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_guer1")
+script = ExtResource("2_8psoq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.345098)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 600
+theme_override_constants/margin_top = 160
+theme_override_constants/margin_right = 600
+theme_override_constants/margin_bottom = 160
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 80
+text = "Level Up!"
+horizontal_alignment = 1
+
+[node name="Level_Up_Perks" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1.03962e-05, 0.820468, 0.195657, 1)
+theme_override_font_sizes/font_size = 32
+text = "+ Burn Time
++ Attack Damage"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Choose extra perk:"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Button1" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 32
+theme_override_constants/align_to_largest_stylebox = 1
+theme_override_font_sizes/font_size = 32
+theme_override_styles/hover = SubResource("StyleBoxFlat_7ypf0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_waows")
+theme_override_styles/normal = SubResource("StyleBoxFlat_22bu2")
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut nostrud exercitation"
+alignment = 0
+autowrap_mode = 2
+
+[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+theme_override_styles/hover = SubResource("StyleBoxFlat_7ypf0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_waows")
+theme_override_styles/normal = SubResource("StyleBoxFlat_22bu2")
+
+[node name="Button3" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+theme_override_styles/hover = SubResource("StyleBoxFlat_4csmh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_waows")
+theme_override_styles/normal = SubResource("StyleBoxFlat_22bu2")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]

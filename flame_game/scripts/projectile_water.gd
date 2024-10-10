@@ -7,7 +7,7 @@ extends Area2D
 func _ready() -> void:
 	pass
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	position += (Vector2.RIGHT*speed).rotated(rotation)
 
 func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
@@ -20,4 +20,6 @@ func _on_body_entered(body: Node2D) -> void:
 				body.current_health -= damage
 			else:
 				return
+		elif "is_possessed" in body:
+			body.expell_fire()
 		queue_free()

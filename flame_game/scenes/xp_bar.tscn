@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cde4xbxhsksdb" path="res://assets/Fire Bar/xp_inner.png" id="1_qkb30"]
 [ext_resource type="Texture2D" uid="uid://l44ope43ktwk" path="res://assets/Fire Bar/xp_outer.png" id="2_n0e6i"]
-[ext_resource type="Script" path="res://scenes/xp_bar.gd" id="3_nj1w2"]
+[ext_resource type="Script" path="res://scripts/xp_bar.gd" id="3_nj1w2"]
 
 [node name="Xp_Bar" type="TextureProgressBar"]
 offset_right = 3.0

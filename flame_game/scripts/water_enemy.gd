@@ -14,11 +14,15 @@ var player_position
 var target_position
 var follow_player : bool = true
 var current_health : int = 30
-var shoot_cooldown : bool = false
+var shoot_cooldown : bool = true
 var animation_locked : bool = false
+var player_fire
+var player_lumberjack
 
 func _ready() -> void:
-	player = get_node("../../Player_Fire")
+	player_fire = get_node("../../Player_Fire")
+	player_lumberjack = get_node("../../Player_Lumberjack")
+	set_follow_player()
 	#player.start_possess.connect(set_follow_player)
 	#player.stop_possess.connect(set_follow_player)
 
@@ -45,7 +49,11 @@ func update_facing_direction():
 		animated_sprite.flip_h = true
 		
 func set_follow_player():
-	follow_player = not player.is_possessing
+	#follow_player = not player.is_possessing
+	if player_fire.is_possessing:
+		player = player_lumberjack
+	else:
+		player = player_fire
 	
 func check_health():
 	if current_health <= 0:
@@ -81,3 +89,13 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 func _on_shoot_cooldown_timer_timeout() -> void:
 	shoot_cooldown = false
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	shoot_cooldown = false
+	shoot_cooldown_timer.paused = false
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	shoot_cooldown = true
+	shoot_cooldown_timer.paused = true

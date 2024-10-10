@@ -4,6 +4,7 @@ signal healthChanged
 signal xpChanged
 signal start_possess
 signal stop_possess
+signal level_up
 
 @onready var water_enemy : PackedScene = preload("res://scenes/water_enemy.tscn")
 @onready var projectile : PackedScene = preload("res://scenes/projectile.tscn")

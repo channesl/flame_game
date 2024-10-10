@@ -150,27 +150,31 @@ offsets = PackedFloat32Array(0, 0.509615, 0.754808, 0.980769)
 colors = PackedColorArray(0.933333, 0.960784, 0.419608, 1, 0.972549, 0.25098, 0.105882, 1, 0.6, 0.0666667, 0, 1, 0, 0, 0, 1)
 
 [node name="Player_Fire" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_layer = 4
+collision_mask = 17
 script = ExtResource("1_yrmfs")
 movement_speed = 150.0
-max_health = 100
+max_health = 200
 spawn_enemy_interval = 20.0
 shoot_cooldown_time = 0.5
 fireball_cost = 5
 time_damage = 2
 time_damage_possessing = 1
 loose_health_time = 0.5
-level_1 = 100
+level_1 = 50
 level_2 = 150
 level_3 = 200
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(2, 2, 2, 1)
 sprite_frames = SubResource("SpriteFrames_34vdd")
 animation = &"Attacking"
 autoplay = "Idle"
+offset = Vector2(0, -6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
+position = Vector2(0, -4)
 scale = Vector2(2.74956, -2.72083)
 shape = SubResource("CircleShape2D_q7572")
 
@@ -178,10 +182,12 @@ shape = SubResource("CircleShape2D_q7572")
 autostart = true
 
 [node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -6)
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 
 [node name="Path2D" type="Path2D" parent="."]
+position = Vector2(0, -6)
 curve = SubResource("Curve2D_1uypy")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
@@ -195,6 +201,7 @@ unique_name_in_owner = true
 autostart = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -6)
 color = Color(1, 0.557935, 0.103285, 1)
 energy = 0.8
 shadow_enabled = true
@@ -204,6 +211,7 @@ texture = ExtResource("5_jddac")
 texture_scale = 1.5
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(0, -6)
 color = Color(1, 0.556863, 0.101961, 1)
 energy = 1.2
 range_item_cull_mask = 2
@@ -213,6 +221,7 @@ texture = ExtResource("5_jddac")
 texture_scale = 1.5
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -6)
 amount = 20
 lifetime = 0.8
 randomness = 0.3

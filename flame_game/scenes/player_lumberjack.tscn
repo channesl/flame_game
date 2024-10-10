@@ -236,20 +236,23 @@ radius = 5.0
 radius = 35.0143
 
 [node name="Player_Lumberjack" type="CharacterBody2D"]
-position = Vector2(0, -9)
+y_sort_enabled = true
 collision_layer = 2
+collision_mask = 17
 script = ExtResource("1_rjy8c")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_lidx1")
 animation = &"Idle"
 autoplay = "Idle"
+offset = Vector2(0, -16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 12)
+position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_8j1bl")
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -16)
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -263,6 +266,7 @@ one_shot = true
 one_shot = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -16)
 enabled = false
 color = Color(1, 0.557935, 0.103285, 1)
 energy = 0.4
@@ -273,6 +277,7 @@ texture = ExtResource("4_muef2")
 texture_scale = 1.5
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(0, -16)
 enabled = false
 color = Color(1, 0.556863, 0.101961, 1)
 energy = 0.6
