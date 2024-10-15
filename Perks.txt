@@ -36,3 +36,6 @@ lvl 4
 
 7. Spawn minion
 8. Possessing strength (chance to not get expelled from lumberjack)
+
+9. Unlock rage. When activated the luberjack is not affected by enemy projectiles for 5 seconds. Cooldown 30 seconds.
+10 Unclock frenzy. When activated the fire can shoot fireballs much faster at zero cost for 5 seconds. Cooldown 30 seconds.
