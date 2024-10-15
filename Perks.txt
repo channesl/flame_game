@@ -15,4 +15,24 @@ LvL 2:
 5. Possessing chop strength
 6. Increased attack damage
 
-7. 
+LvL 3:
+1. Increased burn time
+2. Decreased attack cost
+3. Increased speed
+4. Increased attack speed
+5. Possessing chop strength
+6. Increased attack damage
+
+7. Spawn minion
+8. Possessing strength (chance to not get expelled from lumberjack)
+
+lvl 4
+1. Increased burn time
+2. Decreased attack cost
+3. Increased speed
+4. Increased attack speed
+5. Possessing chop strength
+6. Increased attack damage
+
+7. Spawn minion
+8. Possessing strength (chance to not get expelled from lumberjack)

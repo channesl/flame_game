@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=3 uid="uid://d4lwqf83xc0og"]
+
+[ext_resource type="Texture2D" uid="uid://m6omuuoiw25s" path="res://assets/Fire Elemental 2/Monster Pack 37 (Elementals 2)/Spritesheets/Elemental Fire 1/Elemental_Fire_1_Idle.png" id="1_5vjt6"]
+[ext_resource type="Script" path="res://scripts/fire_minion.gd" id="1_pei2p"]
+[ext_resource type="Texture2D" uid="uid://bdahgy5qfdvic" path="res://assets/Light/light.png" id="2_23o5q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fl0vg"]
+atlas = ExtResource("1_5vjt6")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vo2xd"]
+atlas = ExtResource("1_5vjt6")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjb6m"]
+atlas = ExtResource("1_5vjt6")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f268k"]
+atlas = ExtResource("1_5vjt6")
+region = Rect2(384, 256, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sc232"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fl0vg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vo2xd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjb6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f268k")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Running",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6gla0"]
+radius = 5.0
+
+[node name="Fire_Minion" type="CharacterBody2D"]
+y_sort_enabled = true
+script = ExtResource("1_pei2p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_sc232")
+animation = &"Running"
+autoplay = "Idle"
+offset = Vector2(0, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_6gla0")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -6)
+color = Color(1, 0.557935, 0.103285, 1)
+energy = 0.5
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 1.0
+texture = ExtResource("2_23o5q")
+texture_scale = 1.5
+
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -4)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2.38419e-07, -4)
+scale = Vector2(0.1, 0.1)
+
+[node name="LifeTimer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="ShootCooldownTimer" to="." method="_on_shoot_cooldown_timer_timeout"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

@@ -8,28 +8,32 @@ extends CharacterBody2D
 
 @export var speed : float = 300.0
 @export var stop_range : float = 70.0
-@export var maxHealth : int = 30
-@export var shoot_cooldown_time : float = 1.5
+@export var maxHealth : int = 3
+@export var shoot_cooldown_time : float = 3
 
 var player_position
 var target_position
 var follow_player : bool = true
-var current_health : int = 30
-var shoot_cooldown : bool = false
+var current_health : int
+var shoot_cooldown : bool = true
 var animation_locked : bool = false
+var player_in_area : bool = false
+var mouse_in_area : bool = false
 
 func _ready() -> void:
+	current_health = maxHealth
 	lumberjack = get_node("../../Player_Lumberjack")
 	player = get_node("../../Player_Fire")
-	#player.start_possess.connect(set_follow_player)
-	#player.stop_possess.connect(set_follow_player)
+	shoot_cooldown_timer.start()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	move_to_player()
 	update_facing_direction()
+	update_animation()
 	check_health()
 	shoot_leaf()
 	set_follow_player()
+	chop_down()
 	
 func move_to_player():
 	player_position = lumberjack.position
@@ -46,13 +50,18 @@ func update_facing_direction():
 	elif target_position.x < 0:
 		animated_sprite.flip_h = true
 		
+func update_animation():
+	if !animation_locked:
+		if velocity != Vector2.ZERO:
+			animated_sprite.play("Running")
+		else:
+			animated_sprite.play("Idle")
+		
 func set_follow_player():
 	follow_player = lumberjack.is_possessed
 	
 func check_health():
 	if current_health <= 0:
-		player.current_xp += 5
-		player.xpChanged.emit()
 		queue_free()
 
 func shoot_leaf():
@@ -75,10 +84,6 @@ func shoot_leaf():
 			animated_sprite.flip_h = true
 	
 
-
-
-
-
 func _on_shoot_cooldown_timer_timeout() -> void:
 	shoot_cooldown = false
 
@@ -86,3 +91,25 @@ func _on_shoot_cooldown_timer_timeout() -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.get_animation() == "Attacking":
 		animation_locked = false
+
+func chop_down() -> void:
+	if player_in_area and mouse_in_area:
+		if Input.is_action_just_pressed("shoot"):
+			if lumberjack.chop_tree():
+				current_health -= 1
+
+func _on_area_2d_body_entered(_body: Node2D) -> void:
+	player_in_area = true
+	
+func _on_area_2d_body_exited(_body: Node2D) -> void:
+	player_in_area = false
+	
+	
+
+
+func _on_area_2d_mouse_entered() -> void:
+	mouse_in_area = true
+
+
+func _on_area_2d_mouse_exited() -> void:
+	mouse_in_area = false

@@ -29,6 +29,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	move_to_player()
 	update_facing_direction()
+	update_animation()
 	check_health()
 	shoot_water()
 	set_follow_player()
@@ -47,6 +48,13 @@ func update_facing_direction():
 		animated_sprite.flip_h = false
 	elif target_position.x < 0:
 		animated_sprite.flip_h = true
+		
+func update_animation():
+	if not animation_locked:
+		if velocity != Vector2.ZERO:
+			animated_sprite.play("Running")
+		else:
+			animated_sprite.play("Idle")
 		
 func set_follow_player():
 	#follow_player = not player.is_possessing

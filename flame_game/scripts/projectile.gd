@@ -1,11 +1,15 @@
 extends Area2D
 
 @export var speed : float = 1
-@export var damage : int = 10
+
+@onready var player
+
+var damage
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	player = get_node("../../Player_Fire")
+	damage = player.damage
 
 func _process(delta: float) -> void:
 	position += (Vector2.RIGHT*speed).rotated(rotation)

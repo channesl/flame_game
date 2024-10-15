@@ -20,6 +20,7 @@ signal level_up
 @export_subgroup("Fireball")
 @export var shoot_cooldown_time : float
 @export var fireball_cost : int
+@export var damage : int
 
 @export_subgroup("Time Damage")
 @export var time_damage : int
@@ -31,6 +32,10 @@ signal level_up
 @export var level_2 : int
 @export var level_3 : int
 
+@export_subgroup("Frenzy")
+@export var frenzy_duration : float
+@export var frenzy_cooldown_time : float
+
 var shoot_cooldown : bool = false
 var input_direction : Vector2 = Vector2.ZERO
 var animation_locked : bool = false
@@ -39,15 +44,26 @@ var fireball_unlocked : bool = true
 var current_level : int = 0
 var current_xp : int = 0
 
+var is_spawn_minion_unlocked : bool = false
+
+var is_frenzy_unlocked : bool = false
+var frenzy_cooldown : bool = false
+var frenzy_active : bool = false
+
 func _ready() -> void:
 	player_lumberjack.get_possessed.connect(set_is_possessing)
 	player_lumberjack.not_possessed.connect(release_lumberjack)
 	$Timer.wait_time = loose_health_time
 	$Spawn_Enemy.wait_time = spawn_enemy_interval
+	$Frenzy_Duration_Timer.wait_time = frenzy_duration
+	$Frenzy_Cooldown_Timer.wait_time = frenzy_cooldown_time
 	
 func _input(event: InputEvent) -> void:
 	if !is_possessing:
-		shoot_fireball()
+		if Input.is_action_just_pressed("shoot"):
+			shoot_fireball()
+		elif Input.is_action_just_pressed("Ability1"):
+			activate_frenzy()
 
 func _physics_process(delta: float) -> void:
 	
@@ -129,8 +145,9 @@ func shoot_fireball():
 		shoot_cooldown = true
 		shoot_cooldown_timer.wait_time = shoot_cooldown_time
 		shoot_cooldown_timer.start()
-		current_health -= fireball_cost
-		healthChanged.emit()
+		if !frenzy_active:
+			current_health -= fireball_cost
+			healthChanged.emit()
 		var projectile_instance = projectile.instantiate()
 		projectile_instance.rotation = $Marker2D.rotation
 		projectile_instance.global_position = $Marker2D.global_position
@@ -183,3 +200,18 @@ func check_xp():
 func update_particles():
 	var particle_direction = (player_lumberjack.position - position).normalized()
 	$CPUParticles2D.direction = particle_direction
+
+func activate_frenzy():
+	if is_frenzy_unlocked and !frenzy_cooldown:
+		frenzy_active = true
+		$Frenzy_Duration_Timer.start()
+		frenzy_cooldown = true
+		shoot_cooldown_time *= 0.5
+
+func _on_frenzy_duration_timer_timeout() -> void:
+	frenzy_active = false
+	shoot_cooldown_time *= 2
+	$Frenzy_Cooldown_Timer.start()
+
+func _on_frenzy_cooldown_timer_timeout() -> void:
+	frenzy_cooldown = false

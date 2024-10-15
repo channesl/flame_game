@@ -157,14 +157,16 @@ script = ExtResource("1_yrmfs")
 movement_speed = 150.0
 max_health = 200
 spawn_enemy_interval = 20.0
-shoot_cooldown_time = 0.5
-fireball_cost = 5
+shoot_cooldown_time = 1.5
+fireball_cost = 10
+damage = 10
 time_damage = 2
 time_damage_possessing = 1
 loose_health_time = 0.5
 level_1 = 50
 level_2 = 150
 level_3 = 200
+frenzy_duration = 5.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(2, 2, 2, 1)
@@ -222,7 +224,7 @@ texture_scale = 1.5
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(0, -6)
-amount = 20
+amount = 40
 lifetime = 0.8
 randomness = 0.3
 emission_shape = 1
@@ -233,7 +235,15 @@ initial_velocity_min = 15.63
 initial_velocity_max = 54.69
 color_ramp = SubResource("Gradient_gkbdv")
 
+[node name="Frenzy_Duration_Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Frenzy_Cooldown_Timer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="ShootCooldownTimer" to="." method="_on_shoot_cooldown_timer_timeout"]
 [connection signal="timeout" from="Spawn_Enemy" to="." method="_on_spawn_enemy_timeout"]
+[connection signal="timeout" from="Frenzy_Duration_Timer" to="." method="_on_frenzy_duration_timer_timeout"]
+[connection signal="timeout" from="Frenzy_Cooldown_Timer" to="." method="_on_frenzy_cooldown_timer_timeout"]

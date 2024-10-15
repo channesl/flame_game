@@ -1,7 +1,6 @@
 extends StaticBody2D
 
 
-@onready var label : Label = $Label
 @onready var log : PackedScene = preload("res://scenes/log.tscn")
 @onready var magic_log : PackedScene = preload("res://scenes/magic_log.tscn")
 @onready var leaf_enemy : PackedScene = preload("res://scenes/leaf_enemy.tscn")

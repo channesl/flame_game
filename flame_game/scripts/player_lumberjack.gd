@@ -18,6 +18,10 @@ var chop_cooldown : bool = false
 var is_running_away : bool = false
 var runaway_direction : Vector2 = Vector2.ZERO
 
+var chance_to_expell : float = 1.0
+
+var is_rage_unlocked : bool = false
+
 func _ready() -> void:
 	player_fire.stop_possess.connect(set_is_possessed)
 	$Chop_Cooldown.wait_time = chop_cooldown_time
@@ -121,7 +125,11 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		animation_locked = false
 
 func expell_fire():
-	player_fire.release_lumberjack()
+	var random = RandomNumberGenerator.new()
+	random.randomize()
+	var rand = random.randf_range(0, 1)
+	if rand <= chance_to_expell:
+		player_fire.release_lumberjack()
 	
 func runaway():
 	is_running_away = true
