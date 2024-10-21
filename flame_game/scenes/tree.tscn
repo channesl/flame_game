@@ -19,6 +19,7 @@ y_sort_enabled = true
 collision_layer = 16
 input_pickable = true
 script = ExtResource("1_utabf")
+max_health = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2

@@ -1,8 +1,34 @@
-[gd_scene load_steps=10 format=3 uid="uid://d4lwqf83xc0og"]
+[gd_scene load_steps=24 format=3 uid="uid://d4lwqf83xc0og"]
 
 [ext_resource type="Texture2D" uid="uid://m6omuuoiw25s" path="res://assets/Fire Elemental 2/Monster Pack 37 (Elementals 2)/Spritesheets/Elemental Fire 1/Elemental_Fire_1_Idle.png" id="1_5vjt6"]
 [ext_resource type="Script" path="res://scripts/fire_minion.gd" id="1_pei2p"]
 [ext_resource type="Texture2D" uid="uid://bdahgy5qfdvic" path="res://assets/Light/light.png" id="2_23o5q"]
+[ext_resource type="Texture2D" uid="uid://b5ks4xb0r3myh" path="res://assets/Fire Elemental 2/Monster Pack 37 (Elementals 2)/Spritesheets/Elemental Fire 1/Elemental_Fire_1_Attack.png" id="2_djku8"]
+[ext_resource type="Texture2D" uid="uid://buuty03c53xcn" path="res://assets/Fire Elemental 2/Monster Pack 37 (Elementals 2)/Spritesheets/Elemental Fire 1/Elemental_Fire_1_Move.png" id="4_8kl7b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxmns"]
+atlas = ExtResource("2_djku8")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csp47"]
+atlas = ExtResource("2_djku8")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bws2"]
+atlas = ExtResource("2_djku8")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jegh7"]
+atlas = ExtResource("2_djku8")
+region = Rect2(384, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo2wt"]
+atlas = ExtResource("2_djku8")
+region = Rect2(512, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lqpx"]
+atlas = ExtResource("2_djku8")
+region = Rect2(640, 256, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fl0vg"]
 atlas = ExtResource("1_5vjt6")
@@ -20,8 +46,55 @@ region = Rect2(256, 256, 128, 128)
 atlas = ExtResource("1_5vjt6")
 region = Rect2(384, 256, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_21jow"]
+atlas = ExtResource("4_8kl7b")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcq6d"]
+atlas = ExtResource("4_8kl7b")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48mnr"]
+atlas = ExtResource("4_8kl7b")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4asa"]
+atlas = ExtResource("4_8kl7b")
+region = Rect2(384, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xo6o"]
+atlas = ExtResource("4_8kl7b")
+region = Rect2(512, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhsnj"]
+atlas = ExtResource("4_8kl7b")
+region = Rect2(640, 256, 128, 128)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_sc232"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxmns")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_csp47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bws2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jegh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo2wt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2lqpx")
+}],
+"loop": false,
+"name": &"Attacking",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fl0vg")
@@ -39,10 +112,28 @@ animations = [{
 "name": &"Idle",
 "speed": 10.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21jow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcq6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48mnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4asa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xo6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhsnj")
+}],
 "loop": true,
 "name": &"Running",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6gla0"]
@@ -50,11 +141,12 @@ radius = 5.0
 
 [node name="Fire_Minion" type="CharacterBody2D"]
 y_sort_enabled = true
+collision_layer = 4
 script = ExtResource("1_pei2p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sc232")
-animation = &"Running"
+animation = &"Attacking"
 autoplay = "Idle"
 offset = Vector2(0, -4)
 

@@ -6,6 +6,8 @@ extends CharacterBody2D
 @export var movement_speed : float = 200
 @export var chop_cooldown_time : float = 1
 @export var runaway_time : float = 4
+@export var rage_time : float = 10
+@export var rage_cooldown_time : float = 30
 
 signal get_possessed
 signal not_possessed
@@ -21,15 +23,21 @@ var runaway_direction : Vector2 = Vector2.ZERO
 var chance_to_expell : float = 1.0
 
 var is_rage_unlocked : bool = false
+var rage_cooldown : bool = false
+var is_rage_active : bool = false
 
 func _ready() -> void:
 	player_fire.stop_possess.connect(set_is_possessed)
 	$Chop_Cooldown.wait_time = chop_cooldown_time
 	$Runaway_Timer.wait_time = runaway_time
+	$Rage_Cooldown_Timer.wait_time = rage_cooldown_time
 	runaway()
 	
 func _input(event: InputEvent) -> void:
-	interact_fire()
+	if Input.is_action_just_pressed("interact"):
+		interact_fire()
+	elif Input.is_action_just_pressed("Ability1"):
+		activate_rage()
 
 func _physics_process(delta: float) -> void:
 	
@@ -144,3 +152,15 @@ func runaway():
 func _on_runaway_timer_timeout() -> void:
 	is_running_away = false
 	velocity = Vector2.ZERO
+	
+func activate_rage():
+	if is_rage_unlocked and !rage_cooldown:
+		is_rage_active = true
+		rage_cooldown = true
+		chop_cooldown_time *= 0.5
+		$Rage_Cooldown_Timer.start()
+
+
+func _on_rage_cooldown_timer_timeout() -> void:
+	rage_cooldown = false
+	chop_cooldown_time *= 2

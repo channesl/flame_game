@@ -5,10 +5,10 @@ extends CharacterBody2D
 @onready var shoot_cooldown_timer : Timer = $ShootCooldownTimer
 @onready var projectile : PackedScene = preload("res://scenes/projectile.tscn")
 
-@export var speed : float = 300.0
+@export var speed : float = 100.0
 @export var stop_range : float = 70.0
 @export var shoot_cooldown_time : float = 1.5
-@export var lifetime : float = 15
+@export var lifetime : float = 15.0
 
 var enemy_position
 var target_position
@@ -17,11 +17,14 @@ var follow_enemy : bool = true
 var shoot_cooldown : bool = true
 var animation_locked : bool = false
 var enemies
+var player
 
 func _ready() -> void:
-	enemies = get_node("../../Enemies")
+	enemies = get_node("../Enemies")
+	player = get_node("../Player_Fire")
 	set_follow_enemy()
 	$LifeTimer.wait_time = lifetime
+	$LifeTimer.start()
 
 func _physics_process(delta: float) -> void:
 	move_to_enemy()
@@ -32,15 +35,15 @@ func _physics_process(delta: float) -> void:
 	
 func move_to_enemy():
 	if enemy == null:
-		pass
+		enemy_position = player.position
 	else:
 		enemy_position = enemy.position
-		target_position = (enemy_position - position).normalized()
+	target_position = (enemy_position - position).normalized()
 		
-		if follow_enemy:
-			if position.distance_to(enemy_position) > stop_range:
-				velocity = Vector2(target_position * speed) 
-				move_and_slide()
+	if follow_enemy:
+		if position.distance_to(enemy_position) > stop_range:
+			velocity = Vector2(target_position * speed) 
+			move_and_slide()
 
 func update_facing_direction():
 	if target_position.x > 0:
@@ -73,7 +76,7 @@ func shoot_fire():
 			var projectile_instance = projectile.instantiate()
 			projectile_instance.rotation = $Marker2D.rotation
 			projectile_instance.global_position = $Marker2D.global_position
-			get_node("../../Projectiles").add_child(projectile_instance)
+			get_node("../Projectiles").add_child(projectile_instance)
 			animation_locked = true
 			animated_sprite.play("Attacking")
 			if enemy_pos.x - position.x > 0:

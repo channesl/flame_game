@@ -42,3 +42,9 @@ position = Vector2(1, 31)
 color = Color(0.654902, 0.235294, 1, 1)
 energy = 0.77
 texture = ExtResource("2_enk76")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(0, -4)
+color = Color(0.564706, 0.156863, 1, 1)
+energy = 0.6
+texture = ExtResource("2_enk76")

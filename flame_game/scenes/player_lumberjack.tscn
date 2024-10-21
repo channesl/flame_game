@@ -287,8 +287,11 @@ shadow_filter_smooth = 50.0
 texture = ExtResource("4_muef2")
 texture_scale = 1.5
 
+[node name="Rage_Cooldown_Timer" type="Timer" parent="."]
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="Chop_Cooldown" to="." method="_on_chop_cooldown_timeout"]
 [connection signal="timeout" from="Runaway_Timer" to="." method="_on_runaway_timer_timeout"]
+[connection signal="timeout" from="Rage_Cooldown_Timer" to="." method="_on_rage_cooldown_timer_timeout"]

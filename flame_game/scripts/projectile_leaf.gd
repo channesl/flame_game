@@ -15,5 +15,6 @@ func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if "is_possessed" in body:
-		body.expell_fire()
+		if body.is_possessed and !body.is_rage_active:
+			body.expell_fire()
 	queue_free()

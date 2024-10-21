@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4h0df41k4j7n"]
+[gd_scene load_steps=7 format=3 uid="uid://b4h0df41k4j7n"]
 
 [ext_resource type="Script" path="res://scripts/tree.gd" id="1_4i5db"]
 [ext_resource type="Texture2D" uid="uid://pvbq1yqql1tx" path="res://assets/Magic tree/Magic_tree_small.png" id="2_c3tin"]
+[ext_resource type="Texture2D" uid="uid://bdahgy5qfdvic" path="res://assets/Light/light.png" id="3_8cxui"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xl36l"]
 radius = 11.0
@@ -19,7 +20,6 @@ y_sort_enabled = true
 collision_layer = 16
 input_pickable = true
 script = ExtResource("1_4i5db")
-max_health = 10
 is_magic = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -55,6 +55,12 @@ shape = SubResource("CircleShape2D_gdcpu")
 visible = false
 position = Vector2(-1, 0)
 occluder = SubResource("OccluderPolygon2D_ajx1a")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -4)
+color = Color(0.564706, 0.156863, 1, 1)
+energy = 0.6
+texture = ExtResource("3_8cxui")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

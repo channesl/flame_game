@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwqm8bw0uaapp"]
+
+[ext_resource type="Script" path="res://scripts/ghosting_effect.gd" id="1_l6p17"]
+[ext_resource type="Texture2D" uid="uid://ybslhkkxonv6" path="res://assets/Fire Elemental 2/Monster Pack 37 (Elementals 2)/Spritesheets/Elemental Fire 2/Elemental_Fire_2_Move.png" id="1_p5yjd"]
+
+[node name="Ghosting_Effect" type="Sprite2D"]
+show_behind_parent = true
+z_index = -1
+texture = ExtResource("1_p5yjd")
+offset = Vector2(0, -9)
+region_enabled = true
+region_rect = Rect2(56, 307, 17, 20)
+script = ExtResource("1_l6p17")

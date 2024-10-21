@@ -5,19 +5,19 @@ extends StaticBody2D
 @onready var magic_log : PackedScene = preload("res://scenes/magic_log.tscn")
 @onready var leaf_enemy : PackedScene = preload("res://scenes/leaf_enemy.tscn")
 
-@export var max_health : int = 3
+@export var max_health : int = 10
 @export var is_magic : bool
 
 var text_percent_visible : float = 0.0
 var text_length : int = 15
 var player_in_area : bool = false
 var mouse_in_area : bool = false
-var current_health : int = 3
+var current_health : int
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#label.visible_ratio = 0.0
+	current_health = max_health
 	pass
 
 

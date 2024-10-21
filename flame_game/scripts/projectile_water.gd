@@ -21,5 +21,6 @@ func _on_body_entered(body: Node2D) -> void:
 			else:
 				return
 		elif "is_possessed" in body:
-			body.expell_fire()
+			if body.is_possessed and !body.is_rage_active:
+				body.expell_fire()
 		queue_free()

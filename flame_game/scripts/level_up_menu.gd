@@ -77,7 +77,7 @@ func perform_extra_perk(perk_number) -> String:
 		5:
 			player.damage += 5
 		6:
-			player.is_spawn_minion_unlocked = true
+			player.is_minion_unlocked = true
 		7:
 			lumberjack.chance_to_expell -= 0.30
 		8:
@@ -98,7 +98,7 @@ func randomize_extra_perks():
 		5: 
 			perks_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 			
-	if player.is_spawn_minion_unlocked and perks_list.find(6) != -1:
+	if player.is_minion_unlocked and perks_list.find(6) != -1:
 		perks_list.remove_at(perks_list.find(6))
 	if lumberjack.is_rage_unlocked and perks_list.find(8) != -1:
 		perks_list.remove_at(perks_list.find(8))
