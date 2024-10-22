@@ -1,0 +1,83 @@
+[gd_scene load_steps=13 format=3 uid="uid://bd8ht4flvnghq"]
+
+[ext_resource type="Texture2D" uid="uid://dundio36kgiap" path="res://assets/heart/Heart-sheet.png" id="1_t3c64"]
+[ext_resource type="Script" path="res://scripts/boss_heart.gd" id="1_u6fyr"]
+[ext_resource type="Texture2D" uid="uid://bk3i2cyvaoqtk" path="res://assets/heart/Heart_grey.png" id="2_wyjx7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yx6mi"]
+atlas = ExtResource("1_t3c64")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ft8c"]
+atlas = ExtResource("1_t3c64")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1dwt"]
+atlas = ExtResource("1_t3c64")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04pde"]
+atlas = ExtResource("1_t3c64")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2yn0"]
+atlas = ExtResource("1_t3c64")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2r18m"]
+atlas = ExtResource("1_t3c64")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mj7x"]
+atlas = ExtResource("2_wyjx7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b0w7c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yx6mi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ft8c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1dwt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04pde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2yn0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2r18m")
+}],
+"loop": true,
+"name": &"Beating",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mj7x")
+}],
+"loop": true,
+"name": &"Still",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_caw4r"]
+radius = 7.0
+
+[node name="Boss_Heart" type="StaticBody2D"]
+script = ExtResource("1_u6fyr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_b0w7c")
+animation = &"Beating"
+autoplay = "Beating"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_caw4r")

@@ -6,6 +6,12 @@ signal start_possess
 signal stop_possess
 signal level_up
 
+signal frenzy_activated
+signal frenzy_over
+signal minion_activated
+signal dash_activated
+signal shoot_activated
+
 @onready var water_enemy : PackedScene = preload("res://scenes/water_enemy.tscn")
 @onready var projectile : PackedScene = preload("res://scenes/projectile.tscn")
 @onready var minion : PackedScene = preload("res://scenes/fire_minion.tscn")
@@ -23,6 +29,7 @@ signal level_up
 @export var shoot_cooldown_time : float
 @export var fireball_cost : int
 @export var damage : int
+@export var fireball_unlocked : bool
 
 @export_subgroup("Time Damage")
 @export var time_damage : int
@@ -56,12 +63,12 @@ var shoot_cooldown : bool = false
 var input_direction : Vector2 = Vector2.ZERO
 var animation_locked : bool = false
 var is_possessing : bool = false
-var fireball_unlocked : bool = true
 var current_level : int = 0
 var current_xp : int = 0
 
 var frenzy_cooldown : bool = false
 var frenzy_active : bool = false
+
 
 var minion_cooldown : bool = false
 
@@ -180,6 +187,7 @@ func shoot_fireball():
 		shoot_cooldown = true
 		shoot_cooldown_timer.wait_time = shoot_cooldown_time
 		shoot_cooldown_timer.start()
+		shoot_activated.emit()
 		if !frenzy_active:
 			current_health -= fireball_cost
 			healthChanged.emit()
@@ -245,6 +253,7 @@ func activate_frenzy():
 		$Frenzy_Duration_Timer.start()
 		frenzy_cooldown = true
 		shoot_cooldown_time *= 0.5
+		frenzy_activated.emit()
 
 func _on_frenzy_duration_timer_timeout() -> void:
 	frenzy_active = false
@@ -264,6 +273,7 @@ func spawn_minion():
 		game_scene.add_child(minion_instance)
 		minion_cooldown = true
 		$Minion_Cooldown_Timer.start()
+		minion_activated.emit()
 
 func _on_minion_cooldown_timer_timeout() -> void:
 	minion_cooldown = false
@@ -279,6 +289,7 @@ func activate_dash():
 		dash_cooldown = true
 		$Dash_Cooldown_Timer.start()
 		start_ghosting_effect()
+		dash_activated.emit()
 
 
 func _on_dash_cooldown_timer_timeout() -> void:

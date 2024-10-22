@@ -11,6 +11,8 @@ extends CharacterBody2D
 
 signal get_possessed
 signal not_possessed
+signal rage_activated
+signal chop_activated
 
 var input_direction : Vector2 = Vector2.ZERO
 var animation_locked : bool = false
@@ -121,6 +123,7 @@ func chop_tree() -> bool:
 		$Chop_Cooldown.start()
 		animation_locked = true
 		animated_sprite.play("Chopping")
+		chop_activated.emit()
 		return true
 
 
@@ -159,6 +162,7 @@ func activate_rage():
 		rage_cooldown = true
 		chop_cooldown_time *= 0.5
 		$Rage_Cooldown_Timer.start()
+		rage_activated.emit()
 
 
 func _on_rage_cooldown_timer_timeout() -> void:

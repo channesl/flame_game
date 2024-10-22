@@ -1,0 +1,193 @@
+[gd_scene load_steps=8 format=3 uid="uid://bo55x7a2io0j6"]
+
+[ext_resource type="Script" path="res://scripts/lumberjack_abilities.gd" id="1_j4k7o"]
+[ext_resource type="Texture2D" uid="uid://d25yakkormie" path="res://assets/Ability Icons/Spells/fire_spell.png" id="2_6wqkc"]
+[ext_resource type="Texture2D" uid="uid://c1wbndy13rpmj" path="res://assets/Ability Icons/Spell_Overlay.png" id="2_wrr7y"]
+[ext_resource type="FontFile" uid="uid://1jkqlh4v7k81" path="res://assets/fonts/Tiny5/Tiny5-Regular.ttf" id="3_345vy"]
+[ext_resource type="Texture2D" uid="uid://vjfwmrryehoc" path="res://assets/Ability Icons/Spell_Locked.png" id="4_a7yak"]
+[ext_resource type="Texture2D" uid="uid://ch0py8rjemv6m" path="res://assets/Ability Icons/Archive2[skills_buffs_debuffs]/icon__122.png" id="6_jv06p"]
+[ext_resource type="Texture2D" uid="uid://cpswhf7r6xqil" path="res://assets/Ability Icons/Buffs/negative_status_resistance.png" id="7_c2v2y"]
+
+[node name="Lumberjack_Abilities" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+script = ExtResource("1_j4k7o")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+offset_right = 318.0
+grow_vertical = 0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Possess" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_vertical = 8
+button_mask = 0
+texture_normal = ExtResource("2_6wqkc")
+stretch_mode = 0
+
+[node name="Possess_Bar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/Possess"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 2
+nine_patch_stretch = true
+texture_progress = ExtResource("2_wrr7y")
+tint_progress = Color(0, 0, 0, 0.847059)
+
+[node name="Possess_Hotkey" type="Label" parent="MarginContainer/HBoxContainer/Possess"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -32.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/outline_size = 13
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_345vy")
+theme_override_font_sizes/font_size = 32
+text = "F"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Possess_Lock" type="TextureRect" parent="MarginContainer/HBoxContainer/Possess"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_a7yak")
+
+[node name="Chop" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_vertical = 8
+button_mask = 0
+texture_normal = ExtResource("6_jv06p")
+stretch_mode = 0
+
+[node name="Chop_Bar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/Chop"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 2
+nine_patch_stretch = true
+texture_progress = ExtResource("2_wrr7y")
+tint_progress = Color(0, 0, 0, 0.847059)
+
+[node name="Chop_Hotkey" type="Label" parent="MarginContainer/HBoxContainer/Chop"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -32.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/outline_size = 13
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_345vy")
+theme_override_font_sizes/font_size = 32
+text = "LMB"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Chop_Lock" type="TextureRect" parent="MarginContainer/HBoxContainer/Chop"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_a7yak")
+
+[node name="Rage" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_vertical = 8
+button_mask = 0
+texture_normal = ExtResource("7_c2v2y")
+stretch_mode = 0
+
+[node name="Rage_Bar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/Rage"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+fill_mode = 2
+nine_patch_stretch = true
+texture_progress = ExtResource("2_wrr7y")
+tint_progress = Color(0, 0, 0, 0.847059)
+
+[node name="Rage_Hotkey" type="Label" parent="MarginContainer/HBoxContainer/Rage"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -32.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/outline_size = 13
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_345vy")
+theme_override_font_sizes/font_size = 32
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rage_Lock" type="TextureRect" parent="MarginContainer/HBoxContainer/Rage"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_a7yak")

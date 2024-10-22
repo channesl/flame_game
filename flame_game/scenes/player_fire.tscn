@@ -160,6 +160,7 @@ spawn_enemy_interval = 20.0
 shoot_cooldown_time = 1.5
 fireball_cost = 10
 damage = 10
+fireball_unlocked = true
 time_damage = 2
 time_damage_possessing = 1
 loose_health_time = 0.5

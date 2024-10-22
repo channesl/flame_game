@@ -1,32 +1,306 @@
-[gd_scene load_steps=2 format=3 uid="uid://chbiejah1cghg"]
+[gd_scene load_steps=10 format=3 uid="uid://chbiejah1cghg"]
 
 [ext_resource type="Texture2D" uid="uid://dulaeb75xyaeb" path="res://assets/Ability Icons/Debuffs/on_fire_(burning).png" id="1_48uin"]
+[ext_resource type="Script" path="res://scripts/fire_abilities.gd" id="1_gfqro"]
+[ext_resource type="Texture2D" uid="uid://c1wbndy13rpmj" path="res://assets/Ability Icons/Spell_Overlay.png" id="3_orbkw"]
+[ext_resource type="FontFile" uid="uid://1jkqlh4v7k81" path="res://assets/fonts/Tiny5/Tiny5-Regular.ttf" id="4_2teny"]
+[ext_resource type="Texture2D" uid="uid://vjfwmrryehoc" path="res://assets/Ability Icons/Spell_Locked.png" id="5_lr6tx"]
+[ext_resource type="Texture2D" uid="uid://bo0e4a8xgq7it" path="res://assets/Ability Icons/Spells/fire_spell_2.png" id="6_3difm"]
+[ext_resource type="Texture2D" uid="uid://csbudytvvo2gw" path="res://assets/Ability Icons/Buffs/swiftness.png" id="7_l02mv"]
+[ext_resource type="Texture2D" uid="uid://cpswhf7r6xqil" path="res://assets/Ability Icons/Buffs/negative_status_resistance.png" id="8_6rm0d"]
+[ext_resource type="Texture2D" uid="uid://htxm5mgisggn" path="res://assets/Ability Icons/Spells/summoning_spell.png" id="9_2r5yc"]
 
 [node name="Fire_Abilities" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 2
+anchor_top = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+script = ExtResource("1_gfqro")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+offset_right = 506.0
+grow_vertical = 0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Possess" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_vertical = 8
+button_mask = 0
+texture_normal = ExtResource("1_48uin")
+stretch_mode = 0
+
+[node name="Possess_Bar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/Possess"]
+custom_minimum_size = Vector2(90, 90)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+fill_mode = 2
+nine_patch_stretch = true
+texture_progress = ExtResource("3_orbkw")
+tint_progress = Color(0, 0, 0, 0.847059)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-layout_mode = 2
+[node name="Possess_Hotkey" type="Label" parent="MarginContainer/HBoxContainer/Possess"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -32.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/outline_size = 13
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_2teny")
+theme_override_font_sizes/font_size = 32
+text = "F"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="TextureButton" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+[node name="Possess_Lock" type="TextureRect" parent="MarginContainer/HBoxContainer/Possess"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_lr6tx")
+
+[node name="Shoot" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_vertical = 8
-texture_normal = ExtResource("1_48uin")
+button_mask = 0
+texture_normal = ExtResource("6_3difm")
+stretch_mode = 0
 
-[node name="TextureButton2" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+[node name="Shoot_Bar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/Shoot"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+fill_mode = 2
+nine_patch_stretch = true
+texture_progress = ExtResource("3_orbkw")
+tint_progress = Color(0, 0, 0, 0.847059)
+
+[node name="Shoot_Hotkey" type="Label" parent="MarginContainer/HBoxContainer/Shoot"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -32.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/outline_size = 13
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_2teny")
+theme_override_font_sizes/font_size = 32
+text = "LMB"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shoot_Lock" type="TextureRect" parent="MarginContainer/HBoxContainer/Shoot"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_lr6tx")
+
+[node name="Dash" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 size_flags_vertical = 8
-texture_normal = ExtResource("1_48uin")
+button_mask = 0
+texture_normal = ExtResource("7_l02mv")
+stretch_mode = 0
+
+[node name="Dash_Bar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/Dash"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+fill_mode = 2
+nine_patch_stretch = true
+texture_progress = ExtResource("3_orbkw")
+tint_progress = Color(0, 0, 0, 0.847059)
+
+[node name="Dash_Hotkey" type="Label" parent="MarginContainer/HBoxContainer/Dash"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -32.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/outline_size = 13
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_2teny")
+theme_override_font_sizes/font_size = 24
+text = "SPACE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dash_Lock" type="TextureRect" parent="MarginContainer/HBoxContainer/Dash"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_lr6tx")
+
+[node name="Frenzy" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_vertical = 8
+button_mask = 0
+texture_normal = ExtResource("8_6rm0d")
+stretch_mode = 0
+
+[node name="Frenzy_Bar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/Frenzy"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+fill_mode = 2
+nine_patch_stretch = true
+texture_progress = ExtResource("3_orbkw")
+tint_progress = Color(0, 0, 0, 0.847059)
+
+[node name="Frenzy_Hotkey" type="Label" parent="MarginContainer/HBoxContainer/Frenzy"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -32.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/outline_size = 13
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_2teny")
+theme_override_font_sizes/font_size = 32
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Frenzy_Lock" type="TextureRect" parent="MarginContainer/HBoxContainer/Frenzy"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_lr6tx")
+
+[node name="Summon" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_vertical = 8
+button_mask = 0
+texture_normal = ExtResource("9_2r5yc")
+stretch_mode = 0
+
+[node name="Summon_Bar" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/Summon"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+fill_mode = 2
+nine_patch_stretch = true
+texture_progress = ExtResource("3_orbkw")
+tint_progress = Color(0, 0, 0, 0.847059)
+
+[node name="Summon_Hotkey" type="Label" parent="MarginContainer/HBoxContainer/Summon"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -32.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/outline_size = 13
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_2teny")
+theme_override_font_sizes/font_size = 32
+text = "Q"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Summon_Lock" type="TextureRect" parent="MarginContainer/HBoxContainer/Summon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_lr6tx")
