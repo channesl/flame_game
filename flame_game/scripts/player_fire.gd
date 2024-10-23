@@ -36,11 +36,6 @@ signal shoot_activated
 @export var time_damage_possessing : int
 @export var loose_health_time : float
 
-@export_subgroup("Level Caps")
-@export var level_1 : int
-@export var level_2 : int
-@export var level_3 : int
-
 @export_subgroup("Frenzy")
 @export var frenzy_duration : float
 @export var frenzy_cooldown_time : float
@@ -64,7 +59,6 @@ var input_direction : Vector2 = Vector2.ZERO
 var animation_locked : bool = false
 var is_possessing : bool = false
 var current_level : int = 0
-var current_xp : int = 0
 
 var frenzy_cooldown : bool = false
 var frenzy_active : bool = false
@@ -79,6 +73,8 @@ var game_scene
 
 var ghosts_left
 var ghost_interval
+
+var is_in_boss_room = false
 
 func _ready() -> void:
 	player_lumberjack.get_possessed.connect(set_is_possessing)
@@ -116,7 +112,9 @@ func _physics_process(delta: float) -> void:
 		update_particles()
 		
 	set_visability()
-	check_xp()
+	update_spawn_interval()
+	
+
 	
 func movement():
 	
@@ -220,28 +218,13 @@ func spawn_enemy() -> void:
 		water_enemy_instance.global_position = %Enemy_Spawn_Postition.global_position
 		%Enemies.add_child(water_enemy_instance)
 	
+func update_spawn_interval():
+	$Spawn_Enemy.wait_time = spawn_enemy_interval
 
 func _on_spawn_enemy_timeout() -> void:
 	spawn_enemy()
 #endregion
 	
-func check_xp():
-	if current_level == 0:
-		if current_xp >= level_1:
-			current_level = 1
-			current_xp -= level_1
-			xpChanged.emit()
-	if current_level == 1:
-		if current_xp >= level_2:
-			current_level = 2
-			current_xp -= level_2
-			xpChanged.emit()
-	if current_level == 2:
-		if current_xp >= level_3:
-			current_level = 3
-			current_xp -= level_3
-			xpChanged.emit()
-			
 func update_particles():
 	var particle_direction = (player_lumberjack.position - position).normalized()
 	$CPUParticles2D.direction = particle_direction

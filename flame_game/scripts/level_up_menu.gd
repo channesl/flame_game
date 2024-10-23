@@ -27,11 +27,15 @@ func set_perks_label():
 	if player.current_level == 1:
 		perks_label.text = "
 		Ability Unlocked: Fireball [MouseButton 1]\n"
+		player.fireball_unlocked = true
 	if player.current_level == 2:
 		perks_label.text = ""
+		player.spawn_enemy_interval -= 5
 	if player.current_level == 3:
 		perks_label.text = "
 		Ability Unlocked: Dash [Space] (Towards mouse position)\n"
+		player.is_dash_unlocked = true
+		player.spawn_enemy_interval -= 5
 	if player.current_level == 4:
 		perks_label.text = ""
 		

@@ -11,14 +11,22 @@ var player : CharacterBody2D
 
 var roots : Node2D
 
+var has_damaged = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	roots = get_node("..")
-
+	
 func _physics_process(delta: float) -> void:
-	if $AnimatedSprite2D.frame > 14:
-		$Area2D.monitorable = true
+	damage_player()
+	check_health()
+	
+func damage_player():
+	if player_in_area and $AnimatedSprite2D.frame > 14 and !has_damaged:
+		player.current_health -= damage
+		player.healthChanged.emit()
+		has_damaged = true
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if "is_possessing" in body:
@@ -32,12 +40,13 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-	if player_in_area:
-		player.current_health -= damage
+	queue_free()
 		
 func check_health():
 	if current_health <= 0:
 		var new_log_scene = log.instantiate()
 		roots.call_deferred("add_child", new_log_scene)
 		new_log_scene.position = position
+		new_log_scene.position.y -= 5
+		queue_free()
 		

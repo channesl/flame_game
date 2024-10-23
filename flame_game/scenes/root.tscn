@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://rmjjlhuy6ovx"]
+[gd_scene load_steps=13 format=3 uid="uid://rmjjlhuy6ovx"]
 
 [ext_resource type="Texture2D" uid="uid://c3lvkbdapk8yo" path="res://assets/Ent Boss/Roots.png" id="1_3nch5"]
 [ext_resource type="Script" path="res://scenes/root.gd" id="1_62qv7"]
@@ -90,6 +90,18 @@ animations = [{
 }, {
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_vhiyy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2a5tx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_657ej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dg083")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4yg8h")
 }],
 "loop": false,
 "name": &"default",
@@ -100,21 +112,30 @@ animations = [{
 radius = 7.0
 height = 16.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p1ua1"]
+radius = 7.0
+height = 16.0
+
 [node name="Root" type="StaticBody2D"]
+collision_layer = 8
 script = ExtResource("1_62qv7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_84t6h")
-frame = 18
-frame_progress = 1.0
+autoplay = "default"
 offset = Vector2(0, -15)
 
 [node name="Area2D" type="Area2D" parent="."]
-monitorable = false
+collision_layer = 8
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -9)
 shape = SubResource("CapsuleShape2D_rp5fg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9)
+shape = SubResource("CapsuleShape2D_p1ua1")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
