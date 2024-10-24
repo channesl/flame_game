@@ -245,7 +245,7 @@ sources/0 = SubResource("TileSetAtlasSource_6muku")
 [node name="Boss_Room" type="Node2D"]
 script = ExtResource("1_ib2ew")
 time_before_roots = 5.0
-time_between_roots = 5.0
+time_between_roots = 7.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -2

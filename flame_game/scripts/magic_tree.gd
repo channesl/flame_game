@@ -4,6 +4,8 @@ extends StaticBody2D
 
 signal enters_boss_room
 
+@onready var objective_ui = get_node("../../Objective/Objective_UI")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	open_tree()
@@ -24,3 +26,4 @@ func _on_enter_area_body_entered(body: Node2D) -> void:
 		body.position = boss_room.get_child(-1).global_position
 		body.is_in_boss_room = true
 		enters_boss_room.emit()
+		objective_ui.current_objective += 1

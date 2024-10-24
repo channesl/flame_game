@@ -13,6 +13,7 @@ signal dash_activated
 signal shoot_activated
 
 @onready var water_enemy : PackedScene = preload("res://scenes/water_enemy.tscn")
+@onready var big_water_enemy : PackedScene = preload("res://scenes/big_water_enemy.tscn")
 @onready var projectile : PackedScene = preload("res://scenes/projectile.tscn")
 @onready var minion : PackedScene = preload("res://scenes/fire_minion.tscn")
 @onready var ghost_effect : PackedScene = preload("res://scenes/ghosting_effect.tscn")
@@ -209,14 +210,32 @@ func _on_shoot_cooldown_timer_timeout() -> void:
 	
 #region Spawn Enemy
 func spawn_enemy() -> void:
-	if %Enemies.get_child_count() < 5 and current_level > 0:
-		var random = RandomNumberGenerator.new()
-		random.randomize()
-		$Path2D/PathFollow2D.progress_ratio = random.randf_range(0, 1)
+	match current_level:
+		1, 2:
+			if %Enemies.get_child_count() < 5:
+				var random = RandomNumberGenerator.new()
+				random.randomize()
+				$Path2D/PathFollow2D.progress_ratio = random.randf_range(0, 1)
+				
+				var water_enemy_instance = water_enemy.instantiate()
+				water_enemy_instance.global_position = %Enemy_Spawn_Postition.global_position
+				%Enemies.add_child(water_enemy_instance)
+		3, 4:
+			if %Enemies.get_child_count() < 5:
+				var random = RandomNumberGenerator.new()
+				random.randomize()
+				$Path2D/PathFollow2D.progress_ratio = random.randf_range(0, 1)
+				var random_enemy_type = random.randf_range(0, 1)
+				
+				if random_enemy_type < 0.7:
+					var water_enemy_instance = water_enemy.instantiate()
+					water_enemy_instance.global_position = %Enemy_Spawn_Postition.global_position
+					%Enemies.add_child(water_enemy_instance)
+				else:
+					var water_enemy_instance = big_water_enemy.instantiate()
+					water_enemy_instance.global_position = %Enemy_Spawn_Postition.global_position
+					%Enemies.add_child(water_enemy_instance)
 		
-		var water_enemy_instance = water_enemy.instantiate()
-		water_enemy_instance.global_position = %Enemy_Spawn_Postition.global_position
-		%Enemies.add_child(water_enemy_instance)
 	
 func update_spawn_interval():
 	$Spawn_Enemy.wait_time = spawn_enemy_interval

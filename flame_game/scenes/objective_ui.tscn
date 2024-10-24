@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://c0vuyxf4nrv5"]
+
+[ext_resource type="Texture2D" uid="uid://bs0qh8m15kodq" path="res://assets/mystic_woods/objects/Magic_Log.png" id="1_384jc"]
+[ext_resource type="Script" path="res://scripts/objective_ui.gd" id="1_sylcs"]
+[ext_resource type="Texture2D" uid="uid://mhsy8wx8ksvs" path="res://assets/Ent Boss/Single_Root.png" id="2_4wv5d"]
+[ext_resource type="Texture2D" uid="uid://d2jepccnj8x3s" path="res://assets/Magic tree/Tree_Open.png" id="3_wgvqd"]
+[ext_resource type="FontFile" uid="uid://1jkqlh4v7k81" path="res://assets/fonts/Tiny5/Tiny5-Regular.ttf" id="4_q8ew7"]
+[ext_resource type="Texture2D" uid="uid://bk3i2cyvaoqtk" path="res://assets/heart/Heart_grey.png" id="5_a22lj"]
+
+[node name="Objective_UI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_sylcs")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Magic_Log" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("1_384jc")
+stretch_mode = 5
+
+[node name="Open_Tree" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("3_wgvqd")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Root" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(60, 150)
+layout_mode = 2
+texture = ExtResource("2_4wv5d")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="Heart" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 0.545098, 1, 1)
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 2
+texture = ExtResource("5_a22lj")
+stretch_mode = 5
+
+[node name="Progress" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_q8ew7")
+theme_override_font_sizes/font_size = 64
+text = "0/4"

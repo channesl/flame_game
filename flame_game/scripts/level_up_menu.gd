@@ -35,7 +35,6 @@ func set_perks_label():
 		perks_label.text = "
 		Ability Unlocked: Dash [Space] (Towards mouse position)\n"
 		player.is_dash_unlocked = true
-		player.spawn_enemy_interval -= 5
 	if player.current_level == 4:
 		perks_label.text = ""
 		
@@ -97,9 +96,9 @@ func randomize_extra_perks():
 			perks_list = [1, 2, 3, 4, 5]
 		2: 
 			perks_list = [1, 2, 3, 4, 5]
-		4: 
+		3: 
 			perks_list = [1, 2, 3, 4, 5, 6, 7, 8]
-		5: 
+		4: 
 			perks_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 			
 	if player.is_minion_unlocked and perks_list.find(6) != -1:

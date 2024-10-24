@@ -25,8 +25,8 @@
 [ext_resource type="FontFile" uid="uid://dma36ayybtqgh" path="res://assets/fonts/alagard/alagard.ttf" id="22_mnvje"]
 [ext_resource type="PackedScene" uid="uid://bf33c6hncnks1" path="res://scenes/magic_log.tscn" id="23_3qaco"]
 [ext_resource type="PackedScene" uid="uid://cdb1pwf5ap8do" path="res://scenes/magic_tree.tscn" id="24_mivfb"]
-[ext_resource type="PackedScene" uid="uid://cgu7ygsx40pc6" path="res://scenes/leaf_enemy.tscn" id="26_bgon2"]
 [ext_resource type="PackedScene" uid="uid://8s3j8d3ui48y" path="res://scenes/level_up_menu.tscn" id="27_ivcut"]
+[ext_resource type="PackedScene" uid="uid://c0vuyxf4nrv5" path="res://scenes/objective_ui.tscn" id="27_nq55s"]
 [ext_resource type="PackedScene" uid="uid://bo55x7a2io0j6" path="res://scenes/lumberjack_abilities.tscn" id="28_8edtr"]
 [ext_resource type="PackedScene" uid="uid://chbiejah1cghg" path="res://scenes/fire_abilities.tscn" id="29_2bge4"]
 [ext_resource type="PackedScene" uid="uid://8dybkdjjka6l" path="res://scenes/boss_room.tscn" id="31_ksd07"]
@@ -461,9 +461,6 @@ unique_name_in_owner = true
 [node name="Enemies" type="Node2D" parent="."]
 unique_name_in_owner = true
 y_sort_enabled = true
-
-[node name="Leaf_Enemy" parent="Enemies" instance=ExtResource("26_bgon2")]
-position = Vector2(2060, 1792)
 
 [node name="Trees" parent="." instance=ExtResource("18_oc0s6")]
 unique_name_in_owner = true
@@ -1060,9 +1057,18 @@ position = Vector2(3185, 1070)
 [node name="Magic_Log" parent="Trees" instance=ExtResource("23_3qaco")]
 position = Vector2(2239, 1797)
 
+[node name="Magic_Log2" parent="Trees" instance=ExtResource("23_3qaco")]
+position = Vector2(2261, 1843)
+
 [node name="Magic_Tree" parent="Trees" node_paths=PackedStringArray("boss_room") instance=ExtResource("24_mivfb")]
 position = Vector2(2181, 1744)
 boss_room = NodePath("../../Boss_Room")
+
+[node name="Magic_Log3" parent="Trees" instance=ExtResource("23_3qaco")]
+position = Vector2(2268, 1903)
+
+[node name="Magic_Log4" parent="Trees" instance=ExtResource("23_3qaco")]
+position = Vector2(2265, 1872)
 
 [node name="HealthBar" type="CanvasLayer" parent="."]
 
@@ -1095,6 +1101,10 @@ stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
 player = NodePath("../../../Player_Fire")
+
+[node name="Objective" type="CanvasLayer" parent="."]
+
+[node name="Objective_UI" parent="Objective" instance=ExtResource("27_nq55s")]
 
 [node name="Abilities" type="CanvasLayer" parent="."]
 

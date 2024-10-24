@@ -4,16 +4,19 @@ extends CharacterBody2D
 @onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var shoot_cooldown_timer : Timer = $ShootCooldownTimer
 @onready var projectile : PackedScene = preload("res://scenes/projectile_water.tscn")
+@onready var big_projectile : PackedScene = preload("res://scenes/big_water_projectile.tscn")
+
 
 @export var speed : float = 300.0
 @export var stop_range : float = 70.0
 @export var maxHealth : int = 30
 @export var shoot_cooldown_time : float = 1.5
+@export var is_big : bool = false
 
 var player_position
 var target_position
 var follow_player : bool = true
-var current_health : int = 30
+@onready var current_health : int = maxHealth
 var shoot_cooldown : bool = true
 var animation_locked : bool = false
 var player_fire
@@ -23,6 +26,7 @@ func _ready() -> void:
 	player_fire = get_node("../../Player_Fire")
 	player_lumberjack = get_node("../../Player_Lumberjack")
 	set_follow_player()
+	shoot_cooldown_timer.wait_time = shoot_cooldown_time
 	#player.start_possess.connect(set_follow_player)
 	#player.stop_possess.connect(set_follow_player)
 
@@ -31,7 +35,10 @@ func _physics_process(delta: float) -> void:
 	update_facing_direction()
 	update_animation()
 	check_health()
-	shoot_water()
+	if is_big:
+		shoot_big_water()
+	else:
+		shoot_water()
 	set_follow_player()
 	
 func move_to_player():
@@ -73,7 +80,7 @@ func shoot_water():
 		$Marker2D.look_at(player_pos)
 		
 		shoot_cooldown = true
-		shoot_cooldown_timer.wait_time = shoot_cooldown_time
+		
 		shoot_cooldown_timer.start()
 		var projectile_instance = projectile.instantiate()
 		projectile_instance.rotation = $Marker2D.rotation
@@ -86,7 +93,23 @@ func shoot_water():
 		elif player_pos.x - position.x < 0:
 			animated_sprite.flip_h = true
 	
-
+func shoot_big_water():
+	if !shoot_cooldown and follow_player:
+		
+		var player_pos = player.position
+		
+		shoot_cooldown = true
+		shoot_cooldown_timer.wait_time = shoot_cooldown_time
+		shoot_cooldown_timer.start()
+		var projectile_instance = big_projectile.instantiate()
+		projectile_instance.global_position = player_pos
+		get_node("../../Projectiles").add_child(projectile_instance)
+		animation_locked = true
+		animated_sprite.play("Attacking")
+		if player_pos.x - position.x > 0:
+			animated_sprite.flip_h = false
+		elif player_pos.x - position.x < 0:
+			animated_sprite.flip_h = true
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.get_animation() == "Attacking":

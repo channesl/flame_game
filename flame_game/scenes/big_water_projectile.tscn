@@ -1,0 +1,113 @@
+[gd_scene load_steps=16 format=3 uid="uid://vspacix0e7co"]
+
+[ext_resource type="Script" path="res://scripts/big_water_projectile.gd" id="1_fv50y"]
+[ext_resource type="Texture2D" uid="uid://dojye3dnsna28" path="res://assets/Water Elemental/Spritesheets/Elemental Water 3/Elemental_Water_3_FX.png" id="1_peeun"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt3p0"]
+atlas = ExtResource("1_peeun")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34pxf"]
+atlas = ExtResource("1_peeun")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vi1w0"]
+atlas = ExtResource("1_peeun")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3unoj"]
+atlas = ExtResource("1_peeun")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7u50m"]
+atlas = ExtResource("1_peeun")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2qt7"]
+atlas = ExtResource("1_peeun")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trh03"]
+atlas = ExtResource("1_peeun")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0m4l"]
+atlas = ExtResource("1_peeun")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnpnl"]
+atlas = ExtResource("1_peeun")
+region = Rect2(384, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bawod"]
+atlas = ExtResource("1_peeun")
+region = Rect2(432, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihi03"]
+atlas = ExtResource("1_peeun")
+region = Rect2(480, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7stdm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bt3p0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34pxf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vi1w0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3unoj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7u50m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2qt7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trh03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0m4l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnpnl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bawod")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihi03")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oelly"]
+radius = 6.0
+height = 24.0
+
+[node name="Big_Water_Projectile" type="Area2D"]
+z_index = 2
+collision_mask = 22
+script = ExtResource("1_fv50y")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7stdm")
+autoplay = "default"
+offset = Vector2(0, -22)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("CapsuleShape2D_oelly")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

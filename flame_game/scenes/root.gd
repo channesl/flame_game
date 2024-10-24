@@ -6,6 +6,9 @@ extends StaticBody2D
 
 @onready var log : PackedScene = preload("res://scenes/log.tscn")
 
+@onready var boss_room : Node2D = get_node("../../")
+@onready var animated_sprite : Node2D = $AnimatedSprite2D
+
 var player_in_area : bool = false
 var player : CharacterBody2D
 
@@ -23,7 +26,7 @@ func _physics_process(delta: float) -> void:
 	check_health()
 	
 func damage_player():
-	if player_in_area and $AnimatedSprite2D.frame > 14 and !has_damaged:
+	if player_in_area and animated_sprite.frame > 14 and !has_damaged:
 		player.current_health -= damage
 		player.healthChanged.emit()
 		has_damaged = true
@@ -48,5 +51,6 @@ func check_health():
 		roots.call_deferred("add_child", new_log_scene)
 		new_log_scene.position = position
 		new_log_scene.position.y -= 5
+		boss_room.roots_broken += 1
 		queue_free()
 		

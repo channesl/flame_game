@@ -1,10 +1,19 @@
 extends Node2D
 
+signal root_broken
+
 @onready var root : PackedScene = preload("res://scenes/root.tscn")
+@onready var boss_heart : StaticBody2D = $Boss_Heart
+@onready var objective_ui = get_node("../Objective/Objective_UI")
 
 @export var time_before_roots : float
 @export var time_between_roots : float
 @export var magic_tree : StaticBody2D
+
+var roots_broken = 0
+var current_stage = 0
+var roots_active : bool = true
+var boss_room_active = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,9 +24,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if boss_room_active and !boss_heart.is_damageble:
+		check_roots_broken()
 
 func entered_boss_room():
+	boss_room_active = true
 	print("Start")
 	%Start_Timer.start()
 
@@ -29,15 +40,16 @@ func _on_root_timer_timeout() -> void:
 	spawn_roots()
 
 func spawn_roots():
-	var random = RandomNumberGenerator.new()
-	random.randomize()
-	var rand = random.randi_range(1, 4)
-	var root_positions = get_root_positions(rand)
-	
-	for position in root_positions:
-		var new_root_scene = root.instantiate()
-		%Roots.call_deferred("add_child", new_root_scene)
-		new_root_scene.position = position
+	if roots_active:
+		var random = RandomNumberGenerator.new()
+		random.randomize()
+		var rand = random.randi_range(1, 4)
+		var root_positions = get_root_positions(rand)
+		
+		for position in root_positions:
+			var new_root_scene = root.instantiate()
+			%Roots.call_deferred("add_child", new_root_scene)
+			new_root_scene.position = position
 
 func get_root_positions(position_set_number) -> Array:
 	var positions_array = []
@@ -62,3 +74,22 @@ func get_root_positions(position_set_number) -> Array:
 				for y in 6:
 					positions_array.append(Vector2((-(18*8) + (2*(x+1)*16)), ((16*6) - 8) - (2*y*16)))
 	return positions_array
+
+func check_roots_broken():
+	objective_ui.progress = roots_broken
+	match current_stage:
+		0:
+			if roots_broken >= 4:
+				roots_broken = 0
+				roots_active = false
+				boss_heart.set_is_damageble()
+		1:
+			if roots_broken >= 8:
+				roots_broken = 0
+				roots_active = false
+				boss_heart.set_is_damageble()
+		2:
+			if roots_broken >= 10:
+				roots_broken = 0
+				roots_active = false
+				boss_heart.set_is_damageble()

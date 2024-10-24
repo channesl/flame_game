@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bd8ht4flvnghq"]
+[gd_scene load_steps=14 format=3 uid="uid://bd8ht4flvnghq"]
 
 [ext_resource type="Texture2D" uid="uid://dundio36kgiap" path="res://assets/heart/Heart-sheet.png" id="1_t3c64"]
 [ext_resource type="Script" path="res://scripts/boss_heart.gd" id="1_u6fyr"]
 [ext_resource type="Texture2D" uid="uid://bk3i2cyvaoqtk" path="res://assets/heart/Heart_grey.png" id="2_wyjx7"]
+[ext_resource type="Texture2D" uid="uid://bdahgy5qfdvic" path="res://assets/Light/light.png" id="4_fulw8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yx6mi"]
 atlas = ExtResource("1_t3c64")
@@ -70,6 +71,7 @@ animations = [{
 radius = 7.0
 
 [node name="Boss_Heart" type="StaticBody2D"]
+collision_layer = 8
 script = ExtResource("1_u6fyr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -79,3 +81,10 @@ autoplay = "Beating"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_caw4r")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(0, -4)
+color = Color(0.564706, 0.156863, 1, 1)
+energy = 0.8
+texture = ExtResource("4_fulw8")
+texture_scale = 0.6

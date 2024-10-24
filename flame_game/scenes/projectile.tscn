@@ -61,6 +61,7 @@ height = 18.0
 [node name="Projectile" type="Area2D"]
 collision_mask = 26
 script = ExtResource("1_tpw14")
+speed = 4.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_aljq1")
