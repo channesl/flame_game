@@ -5,6 +5,7 @@ signal root_broken
 @onready var root : PackedScene = preload("res://scenes/root.tscn")
 @onready var boss_heart : StaticBody2D = $Boss_Heart
 @onready var objective_ui = get_node("../Objective/Objective_UI")
+@onready var audio_roots : AudioStreamPlayer = $AudioStreamPlayer_Roots
 
 @export var time_before_roots : float
 @export var time_between_roots : float
@@ -50,6 +51,7 @@ func spawn_roots():
 			var new_root_scene = root.instantiate()
 			%Roots.call_deferred("add_child", new_root_scene)
 			new_root_scene.position = position
+		$Timers/Root_Sound_Timer.start()
 
 func get_root_positions(position_set_number) -> Array:
 	var positions_array = []
@@ -93,3 +95,9 @@ func check_roots_broken():
 				roots_broken = 0
 				roots_active = false
 				boss_heart.set_is_damageble()
+
+
+func _on_root_sound_timer_timeout() -> void:
+	audio_roots.play()
+	audio_roots.play()
+	audio_roots.play()

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://caj1qimw6cd0r"]
+
+[ext_resource type="AudioStream" uid="uid://dgj156agf8a33" path="res://sounds/WaterEnemy/69_Enemy_death_01.wav" id="1_of56c"]
+
+[node name="AudioStreamPlayer_Water_Hit" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_of56c")
+autoplay = true
+bus = &"SFX"

@@ -1,6 +1,7 @@
-[gd_scene load_steps=42 format=3 uid="uid://bbd7iajlyqrny"]
+[gd_scene load_steps=57 format=3 uid="uid://bbd7iajlyqrny"]
 
 [ext_resource type="Texture2D" uid="uid://vac4gpwl2lmk" path="res://assets/mystic_woods/characters/player.png" id="1_1rt3v"]
+[ext_resource type="Script" path="res://scenes/options_menu.gd" id="1_sbr7w"]
 [ext_resource type="Texture2D" uid="uid://tulgkcrhbsd6" path="res://assets/Campfire/F500-1.PNG" id="2_wphxs"]
 [ext_resource type="Texture2D" uid="uid://b4sipu74k1c4" path="res://assets/Campfire/F500-2.PNG" id="3_bgdww"]
 [ext_resource type="Texture2D" uid="uid://vvgo0r4o8sr2" path="res://assets/Campfire/F500-3.PNG" id="4_t83ji"]
@@ -18,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://fvjvcq6vc887" path="res://assets/UI/Slider/Grabber3x.png" id="16_snwik"]
 [ext_resource type="Texture2D" uid="uid://dgavtpjegrjip" path="res://assets/UI/CheckBox/On.png" id="17_khsda"]
 [ext_resource type="Texture2D" uid="uid://cjroaqp88kkxf" path="res://assets/UI/CheckBox/Off.png" id="18_orbrx"]
+[ext_resource type="AudioStream" uid="uid://dujbm4tfjbcik" path="res://sounds/Menu/Sketchbook 2024-03-20_02.ogg" id="20_yrepe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m25a7"]
 atlas = ExtResource("1_1rt3v")
@@ -165,6 +167,32 @@ animations = [{
 color = Color(0.933333, 0.960784, 0.419608, 1)
 thickness = 16
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_81inw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lurao"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jynvv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_odrco"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1kh1c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bqkcr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cydts"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7oskw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3dx8g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hilld"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r5ajn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kapil"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gb5ka"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2rcs2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxsym"]
@@ -176,6 +204,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_sbr7w")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 2
@@ -233,7 +262,7 @@ text = "Volume"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 64
+theme_override_constants/separation = 144
 
 [node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -242,17 +271,26 @@ theme_override_fonts/font = ExtResource("15_5g3si")
 theme_override_font_sizes/font_size = 64
 text = "Master"
 
-[node name="HSlider" type="HSlider" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(256, 0)
+[node name="Master_Volume" type="HSlider" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/center_grabber = 1
 theme_override_icons/grabber = ExtResource("16_snwik")
+theme_override_icons/grabber_highlight = ExtResource("16_snwik")
+theme_override_icons/grabber_disabled = ExtResource("16_snwik")
+theme_override_icons/tick = ExtResource("16_snwik")
 theme_override_styles/slider = SubResource("StyleBoxLine_n8e5h")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_81inw")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_lurao")
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 92
+theme_override_constants/separation = 172
 
 [node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
@@ -261,17 +299,26 @@ theme_override_fonts/font = ExtResource("15_5g3si")
 theme_override_font_sizes/font_size = 64
 text = "Music"
 
-[node name="HSlider" type="HSlider" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(256, 0)
+[node name="Music_Volume" type="HSlider" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/center_grabber = 1
 theme_override_icons/grabber = ExtResource("16_snwik")
+theme_override_icons/grabber_highlight = ExtResource("16_snwik")
+theme_override_icons/grabber_disabled = ExtResource("16_snwik")
+theme_override_icons/tick = ExtResource("16_snwik")
 theme_override_styles/slider = SubResource("StyleBoxLine_n8e5h")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_81inw")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_lurao")
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 148
+theme_override_constants/separation = 228
 
 [node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
@@ -280,13 +327,50 @@ theme_override_fonts/font = ExtResource("15_5g3si")
 theme_override_font_sizes/font_size = 64
 text = "SFX"
 
-[node name="HSlider" type="HSlider" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3"]
-custom_minimum_size = Vector2(256, 0)
+[node name="SFX_Volume" type="HSlider" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/center_grabber = 1
 theme_override_icons/grabber = ExtResource("16_snwik")
+theme_override_icons/grabber_highlight = ExtResource("16_snwik")
+theme_override_icons/grabber_disabled = ExtResource("16_snwik")
+theme_override_icons/tick = ExtResource("16_snwik")
 theme_override_styles/slider = SubResource("StyleBoxLine_n8e5h")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_81inw")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_lurao")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.913725, 0.607843, 0.184314, 1)
+theme_override_fonts/font = ExtResource("15_5g3si")
+theme_override_font_sizes/font_size = 64
+text = "Ambiance"
+
+[node name="Ambiance_Volume" type="HSlider" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer5"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("16_snwik")
+theme_override_icons/grabber_highlight = ExtResource("16_snwik")
+theme_override_icons/grabber_disabled = ExtResource("16_snwik")
+theme_override_icons/tick = ExtResource("16_snwik")
+theme_override_styles/slider = SubResource("StyleBoxLine_n8e5h")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_81inw")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_lurao")
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -300,12 +384,24 @@ theme_override_fonts/font = ExtResource("15_5g3si")
 theme_override_font_sizes/font_size = 96
 text = "Fullscreen"
 
-[node name="CheckButton" type="CheckButton" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer4"]
+[node name="FullscreenButton" type="CheckButton" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jynvv")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_odrco")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_1kh1c")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_bqkcr")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_cydts")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_7oskw")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3dx8g")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_hilld")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_r5ajn")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_kapil")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gb5ka")
 theme_override_icons/checked = ExtResource("17_khsda")
 theme_override_icons/unchecked = ExtResource("18_orbrx")
+button_pressed = true
 
-[node name="Play_button" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="Back_button" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 10
@@ -320,3 +416,16 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_pxsym")
 text = "Back"
 flat = true
 alignment = 0
+
+[node name="AudioStreamPlayer_Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_yrepe")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"
+
+[connection signal="value_changed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/Master_Volume" to="." method="_on_master_volume_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer2/Music_Volume" to="." method="_on_music_volume_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3/SFX_Volume" to="." method="_on_sfx_volume_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer5/Ambiance_Volume" to="." method="_on_ambiance_volume_value_changed"]
+[connection signal="toggled" from="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer4/FullscreenButton" to="." method="_on_fullscreen_button_toggled"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Back_button" to="." method="_on_back_button_pressed"]

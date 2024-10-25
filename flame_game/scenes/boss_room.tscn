@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://8dybkdjjka6l"]
+[gd_scene load_steps=7 format=4 uid="uid://8dybkdjjka6l"]
 
 [ext_resource type="Script" path="res://scripts/boss_room.gd" id="1_ib2ew"]
 [ext_resource type="Texture2D" uid="uid://d1h7v314potx5" path="res://assets/Dungeon/Hana Caraka Mining - Free/tileset.png" id="1_owa0u"]
 [ext_resource type="PackedScene" uid="uid://bd8ht4flvnghq" path="res://scenes/boss_heart.tscn" id="4_gwscl"]
+[ext_resource type="AudioStream" uid="uid://rs0q4rq3nonl" path="res://sounds/Root/040356318-pull-out-weeds-shrub-root-out-.wav" id="4_xm6f1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6muku"]
 texture = ExtResource("1_owa0u")
@@ -274,8 +275,19 @@ one_shot = true
 [node name="Root_Timer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
 
+[node name="Root_Sound_Timer" type="Timer" parent="Timers"]
+wait_time = 3.4
+one_shot = true
+
+[node name="AudioStreamPlayer_Roots" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_xm6f1")
+volume_db = -8.914
+max_polyphony = 3
+bus = &"SFX"
+
 [node name="Player_Spawn" type="Node2D" parent="."]
 position = Vector2(0, 80)
 
 [connection signal="timeout" from="Timers/Start_Timer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="Timers/Root_Timer" to="." method="_on_root_timer_timeout"]
+[connection signal="timeout" from="Timers/Root_Sound_Timer" to="." method="_on_root_sound_timer_timeout"]

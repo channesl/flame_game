@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ix6bb1flyf03"]
+
+[ext_resource type="AudioStream" uid="uid://d3r1aroewmrlx" path="res://sounds/WaterEnemy/21_Water_01.wav" id="1_xl807"]
+
+[node name="AudioStreamPlayer_Water_Shoot" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_xl807")
+volume_db = -14.114
+autoplay = true
+bus = &"SFX"

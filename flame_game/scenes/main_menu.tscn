@@ -1,8 +1,9 @@
-[gd_scene load_steps=46 format=3 uid="uid://dhd0p0t52t27g"]
+[gd_scene load_steps=63 format=3 uid="uid://dhd0p0t52t27g"]
 
 [ext_resource type="Texture2D" uid="uid://cfb8eteyog5de" path="res://assets/UI/Logo.png" id="1_kj6t1"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_t60uu"]
 [ext_resource type="FontFile" uid="uid://dma36ayybtqgh" path="res://assets/fonts/alagard/alagard.ttf" id="2_aomc8"]
+[ext_resource type="Texture2D" uid="uid://cvrklfojmogch" path="res://assets/mystic_woods/characters/player-possessed.png" id="2_x1csk"]
 [ext_resource type="Texture2D" uid="uid://vac4gpwl2lmk" path="res://assets/mystic_woods/characters/player.png" id="3_56hrx"]
 [ext_resource type="Texture2D" uid="uid://tulgkcrhbsd6" path="res://assets/Campfire/F500-1.PNG" id="4_dvtq2"]
 [ext_resource type="Texture2D" uid="uid://b4sipu74k1c4" path="res://assets/Campfire/F500-2.PNG" id="5_efqcj"]
@@ -16,7 +17,36 @@
 [ext_resource type="Texture2D" uid="uid://dm44vqb6ycf4j" path="res://assets/Campfire/F500-10.PNG" id="13_5fqcj"]
 [ext_resource type="Texture2D" uid="uid://d13xami1dudnp" path="res://assets/Campfire/F500-11.PNG" id="14_dlbc4"]
 [ext_resource type="Texture2D" uid="uid://rvywc5p4fpdm" path="res://assets/Campfire/F500-12.PNG" id="15_d8t6n"]
+[ext_resource type="Texture2D" uid="uid://cmrne26v3e3i" path="res://assets/Fire Elemental 2/Monster Pack 37 (Elementals 2)/Spritesheets/Elemental Fire 2/Elemental_Fire_2_Idle.png" id="16_uumi7"]
 [ext_resource type="Texture2D" uid="uid://bdahgy5qfdvic" path="res://assets/Light/light.png" id="16_whj4i"]
+[ext_resource type="Texture2D" uid="uid://bs0qh8m15kodq" path="res://assets/mystic_woods/objects/Magic_Log.png" id="17_v1cn5"]
+[ext_resource type="AudioStream" uid="uid://dujbm4tfjbcik" path="res://sounds/Menu/Sketchbook 2024-03-20_02.ogg" id="18_kq7su"]
+[ext_resource type="AudioStream" uid="uid://bgfpm7ki37l6r" path="res://sounds/Ambiance/Ambiance_Firecamp_Medium_Loop_Mono.wav" id="22_8lji0"]
+[ext_resource type="AudioStream" uid="uid://b3c8kb5wog7q5" path="res://sounds/FireBall/03_Fire_explosion_03_medium.wav" id="23_u2cma"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opgm5"]
+atlas = ExtResource("2_x1csk")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3w2h"]
+atlas = ExtResource("2_x1csk")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lj68a"]
+atlas = ExtResource("2_x1csk")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56da4"]
+atlas = ExtResource("2_x1csk")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38xcl"]
+atlas = ExtResource("2_x1csk")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4s3dv"]
+atlas = ExtResource("2_x1csk")
+region = Rect2(240, 48, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m25a7"]
 atlas = ExtResource("3_56hrx")
@@ -44,6 +74,29 @@ region = Rect2(240, 48, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0krvv"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opgm5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3w2h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lj68a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56da4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38xcl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4s3dv")
+}],
+"loop": true,
+"name": &"Possessed",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_m25a7")
@@ -160,6 +213,42 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1cwt"]
+atlas = ExtResource("16_uumi7")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5klp"]
+atlas = ExtResource("16_uumi7")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abc2c"]
+atlas = ExtResource("16_uumi7")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dl7fc"]
+atlas = ExtResource("16_uumi7")
+region = Rect2(384, 256, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y05vw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1cwt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5klp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abc2c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dl7fc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_no8se"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iclxf"]
@@ -199,16 +288,17 @@ color = Color(0.0980392, 0.239216, 0.247059, 1)
 
 [node name="Node2D" type="Node2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D"]
+[node name="Lumberjack" type="AnimatedSprite2D" parent="Node2D"]
+unique_name_in_owner = true
 position = Vector2(1399, 456)
 scale = Vector2(20, 20)
 sprite_frames = SubResource("SpriteFrames_0krvv")
+animation = &"Possessed"
 autoplay = "default"
-frame = 4
-frame_progress = 0.537152
 flip_h = true
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Node2D"]
+[node name="Campfire" type="AnimatedSprite2D" parent="Node2D"]
+unique_name_in_owner = true
 position = Vector2(1062, 688)
 sprite_frames = SubResource("SpriteFrames_upq7u")
 autoplay = "default"
@@ -221,6 +311,24 @@ scale = Vector2(5.875, 5.875)
 color = Color(0.984314, 0.572549, 0.168627, 1)
 energy = 0.89
 texture = ExtResource("16_whj4i")
+
+[node name="Log" type="Sprite2D" parent="Node2D"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1.5, 1.5, 1.5, 1)
+position = Vector2(1051, 478)
+scale = Vector2(10, 10)
+texture = ExtResource("17_v1cn5")
+
+[node name="Fire" type="AnimatedSprite2D" parent="Node2D"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(2, 2, 2, 1)
+position = Vector2(1047, 783)
+scale = Vector2(15, 15)
+sprite_frames = SubResource("SpriteFrames_y05vw")
+autoplay = "default"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -336,5 +444,21 @@ theme_override_font_sizes/font_size = 32
 text = "V 0.1
 Hannes Lindstrom"
 
+[node name="AudioStreamPlayer_Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_kq7su")
+volume_db = -15.0
+autoplay = true
+
+[node name="AudioStreamPlayer_Fire" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_8lji0")
+volume_db = -8.171
+autoplay = true
+bus = &"Ambiance"
+
+[node name="AudioStreamPlayer_Spark" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_u2cma")
+bus = &"SFX"
+
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/Play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/Options_Button" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/Quit_Button" to="." method="_on_quit_button_pressed"]

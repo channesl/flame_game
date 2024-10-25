@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0cejxvqnnytu"]
+
+[ext_resource type="AudioStream" uid="uid://b3c8kb5wog7q5" path="res://sounds/FireBall/03_Fire_explosion_03_medium.wav" id="1_afkb7"]
+
+[node name="AudioStreamPlayer_Hit" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_afkb7")
+autoplay = true
+bus = &"SFX"

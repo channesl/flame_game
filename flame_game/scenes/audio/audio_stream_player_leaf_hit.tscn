@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkbraqg68oxci"]
+
+[ext_resource type="AudioStream" uid="uid://bwalh4fot64ni" path="res://sounds/LeafEnemy/61_Hit_03.wav" id="1_c3f4c"]
+
+[node name="AudioStreamPlayer_Leaf_Hit" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_c3f4c")
+autoplay = true
+bus = &"SFX"

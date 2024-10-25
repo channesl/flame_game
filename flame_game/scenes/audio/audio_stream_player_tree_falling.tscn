@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b03rbp8j7s8gp"]
+
+[ext_resource type="AudioStream" uid="uid://coj8cpmdkasgt" path="res://sounds/Root/rustling-bushes-dried-leaves-6-230205.mp3" id="1_oygks"]
+
+[node name="AudioStreamPlayer_Tree_Falling" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_oygks")
+autoplay = true
+bus = &"SFX"

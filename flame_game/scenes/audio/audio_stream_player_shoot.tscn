@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj3hfbdr5lh5d"]
+
+[ext_resource type="AudioStream" uid="uid://bu3pphdk50rgd" path="res://sounds/FireBall/09_Fireball_03.wav" id="1_lbjjh"]
+
+[node name="AudioStreamPlayer_Shoot" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_lbjjh")
+autoplay = true
+bus = &"SFX"

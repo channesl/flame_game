@@ -2,6 +2,10 @@ extends CharacterBody2D
 
 @onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var player_fire : CharacterBody2D = %Player_Fire
+@onready var audio_chop : AudioStreamPlayer2D = $Audio/AudioStreamPlayer_Chop
+@onready var audio_chop_leaf : AudioStreamPlayer2D = $Audio/AudioStreamPlayer_Chop_Leaf
+@onready var audio_rage : AudioStreamPlayer2D = $Audio/AudioStreamPlayer_Rage
+@onready var audio_running : AudioStreamPlayer2D = $Audio/AudioStreamPlayer_Running
 
 @export var movement_speed : float = 200
 @export var chop_cooldown_time : float = 1
@@ -48,6 +52,7 @@ func _physics_process(delta: float) -> void:
 	update_facing_direction()
 	update_animation()
 	update_light()
+	audio_running_handler()
 	
 	
 	
@@ -115,7 +120,7 @@ func interact_fire():
 			else:
 				not_possessed.emit()
 			
-func chop_tree() -> bool:
+func chop_tree(object) -> bool:
 	if chop_cooldown:
 		return false
 	else:
@@ -124,6 +129,10 @@ func chop_tree() -> bool:
 		animation_locked = true
 		animated_sprite.play("Chopping")
 		chop_activated.emit()
+		if object == "tree":
+			audio_chop.play()
+		else:
+			audio_chop_leaf.play()
 		return true
 
 
@@ -163,8 +172,18 @@ func activate_rage():
 		chop_cooldown_time *= 0.5
 		$Rage_Cooldown_Timer.start()
 		rage_activated.emit()
+		audio_rage.play()
 
 
 func _on_rage_cooldown_timer_timeout() -> void:
 	rage_cooldown = false
 	chop_cooldown_time *= 2
+
+func audio_running_handler():
+	if !audio_running.playing and !audio_running.stream_paused:
+		audio_running.play()
+	if velocity != Vector2.ZERO:
+		audio_running.stream_paused = false
+	else:
+		audio_running.stream_paused = true
+		

@@ -21,6 +21,12 @@ signal shoot_activated
 @onready var player_lumberjack : CharacterBody2D = %Player_Lumberjack
 @onready var current_health : int = max_health
 @onready var shoot_cooldown_timer : Timer = $ShootCooldownTimer
+@onready var audio_burning : AudioStreamPlayer2D = $Audio/AudioStreamPlayer_Burning
+@onready var audio_dash : AudioStreamPlayer2D = $Audio/AudioStreamPlayer_Dash
+@onready var audio_frenzy : AudioStreamPlayer2D = $Audio/AudioStreamPlayer_Frenzy
+@onready var audio_minion : AudioStreamPlayer2D = $Audio/AudioStreamPlayer_Minion
+@onready var cursor_axe = preload("res://assets/Cursors/Axe_Cursor.png")
+@onready var cursor_fireball = preload("res://assets/Cursors/Fireball_Cursor.png")
 
 @export var movement_speed : float
 @export var max_health : int
@@ -114,6 +120,8 @@ func _physics_process(delta: float) -> void:
 		
 	set_visability()
 	update_spawn_interval()
+	audio_burning_handler()
+	cursor_handler()
 	
 
 	
@@ -256,6 +264,7 @@ func activate_frenzy():
 		frenzy_cooldown = true
 		shoot_cooldown_time *= 0.5
 		frenzy_activated.emit()
+		audio_frenzy.play()
 
 func _on_frenzy_duration_timer_timeout() -> void:
 	frenzy_active = false
@@ -276,6 +285,7 @@ func spawn_minion():
 		minion_cooldown = true
 		$Minion_Cooldown_Timer.start()
 		minion_activated.emit()
+		audio_minion.play()
 
 func _on_minion_cooldown_timer_timeout() -> void:
 	minion_cooldown = false
@@ -292,6 +302,7 @@ func activate_dash():
 		$Dash_Cooldown_Timer.start()
 		start_ghosting_effect()
 		dash_activated.emit()
+		audio_dash.play()
 
 
 func _on_dash_cooldown_timer_timeout() -> void:
@@ -317,3 +328,16 @@ func _on_ghosting_interval_timeout() -> void:
 		ghosts_left -= 1
 		spawn_ghost()
 		$Ghosting_Interval.start()
+		
+
+func audio_burning_handler():
+	if is_possessing:
+		audio_burning.stream_paused = true
+	else:
+		audio_burning.stream_paused = false
+		
+func cursor_handler():
+	if is_possessing:
+		Input.set_custom_mouse_cursor(cursor_axe)
+	else:
+		Input.set_custom_mouse_cursor(cursor_fireball)

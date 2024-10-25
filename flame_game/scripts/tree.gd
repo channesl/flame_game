@@ -4,6 +4,8 @@ extends StaticBody2D
 @onready var log : PackedScene = preload("res://scenes/log.tscn")
 @onready var magic_log : PackedScene = preload("res://scenes/magic_log.tscn")
 @onready var leaf_enemy : PackedScene = preload("res://scenes/leaf_enemy.tscn")
+@onready var audio_falling : PackedScene = preload("res://scenes/audio/audio_stream_player_tree_falling.tscn")
+@onready var audio_group = get_node("../../Audio")
 
 @export var max_health : int = 10
 @export var is_magic : bool
@@ -43,7 +45,7 @@ func chop_down() -> void:
 	if player_in_area and mouse_in_area:
 		if lumberjack.is_possessed:
 			if Input.is_action_just_pressed("shoot"):
-				if lumberjack.chop_tree():
+				if lumberjack.chop_tree("tree"):
 					current_health -= 1
 					if current_health <= 0:
 						if is_magic:
@@ -63,6 +65,10 @@ func chop_down() -> void:
 								enemies.call_deferred("add_child", new_leaf_scene)
 								new_leaf_scene.position = position
 						queue_free()
+						var new_audio_scene = audio_falling.instantiate()
+						audio_group.call_deferred("add_child", new_audio_scene)
+						new_audio_scene.position = position
+						
 
 func _on_area_2d_mouse_entered() -> void:
 	mouse_in_area = true

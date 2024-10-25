@@ -20,16 +20,22 @@ var has_damaged = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	roots = get_node("..")
+	$CollisionShape2D.disabled = true
 	
 func _physics_process(delta: float) -> void:
 	damage_player()
 	check_health()
+	check_if_up()
 	
 func damage_player():
 	if player_in_area and animated_sprite.frame > 14 and !has_damaged:
 		player.current_health -= damage
 		player.healthChanged.emit()
 		has_damaged = true
+
+func check_if_up():
+	if animated_sprite.frame > 13:
+		$CollisionShape2D.disabled = false
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if "is_possessing" in body:

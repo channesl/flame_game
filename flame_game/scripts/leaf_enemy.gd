@@ -67,7 +67,7 @@ func check_health():
 func shoot_leaf():
 	if !shoot_cooldown and follow_player:
 		var player_pos = lumberjack.position
-		$Marker2D.look_at(player_pos- Vector2(0, -5))
+		$Marker2D.look_at(player_pos - Vector2(0, 5))
 		
 		shoot_cooldown = true
 		shoot_cooldown_timer.wait_time = shoot_cooldown_time
@@ -95,7 +95,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func chop_down() -> void:
 	if player_in_area and mouse_in_area:
 		if Input.is_action_just_pressed("shoot"):
-			if lumberjack.chop_tree():
+			if lumberjack.chop_tree("enemy"):
 				current_health -= 1
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:

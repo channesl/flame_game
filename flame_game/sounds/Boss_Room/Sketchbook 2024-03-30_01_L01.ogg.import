@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://8o4qm76rntei"
+path="res://.godot/imported/Sketchbook 2024-03-30_01_L01.ogg-d31b0edade0c263ae462fe8ca8b0ae3d.oggvorbisstr"
+
+[deps]
+
+source_file="res://sounds/Boss_Room/Sketchbook 2024-03-30_01_L01.ogg"
+dest_files=["res://.godot/imported/Sketchbook 2024-03-30_01_L01.ogg-d31b0edade0c263ae462fe8ca8b0ae3d.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

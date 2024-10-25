@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://7f006wx6scjn"]
+
+[ext_resource type="AudioStream" uid="uid://gpoapapjrbtr" path="res://sounds/BigWater/24_Water_04.wav" id="1_y6t4f"]
+
+[node name="AudioStreamPlayer_Big_Water_Shoot" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_y6t4f")
+volume_db = -8.171
+autoplay = true
+bus = &"SFX"

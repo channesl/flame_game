@@ -1,9 +1,13 @@
-[gd_scene load_steps=36 format=3 uid="uid://ca1dnr517d2qy"]
+[gd_scene load_steps=40 format=3 uid="uid://ca1dnr517d2qy"]
 
 [ext_resource type="Texture2D" uid="uid://vac4gpwl2lmk" path="res://assets/mystic_woods/characters/player.png" id="1_3kj32"]
 [ext_resource type="Script" path="res://scripts/player_lumberjack.gd" id="1_rjy8c"]
 [ext_resource type="Texture2D" uid="uid://cvrklfojmogch" path="res://assets/mystic_woods/characters/player-possessed.png" id="2_vqaow"]
 [ext_resource type="Texture2D" uid="uid://bdahgy5qfdvic" path="res://assets/Light/light.png" id="4_muef2"]
+[ext_resource type="AudioStream" uid="uid://dpn6de5btako8" path="res://sounds/Lumberjack/15_Hit_on_wood_1.wav" id="5_j1h6x"]
+[ext_resource type="AudioStream" uid="uid://coj8cpmdkasgt" path="res://sounds/Root/rustling-bushes-dried-leaves-6-230205.mp3" id="6_s0ug4"]
+[ext_resource type="AudioStream" uid="uid://djopmb1lp1o8w" path="res://sounds/PowerUp/55_Encounter_02.wav" id="6_tremo"]
+[ext_resource type="AudioStream" uid="uid://dmefb87j6c4hu" path="res://sounds/Running/Footsteps_Grass_Run_10.wav" id="7_n4y8q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sd0mc"]
 atlas = ExtResource("2_vqaow")
@@ -288,6 +292,25 @@ texture = ExtResource("4_muef2")
 texture_scale = 1.5
 
 [node name="Rage_Cooldown_Timer" type="Timer" parent="."]
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer_Chop" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("5_j1h6x")
+bus = &"SFX"
+
+[node name="AudioStreamPlayer_Chop_Leaf" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("6_s0ug4")
+bus = &"SFX"
+
+[node name="AudioStreamPlayer_Rage" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("6_tremo")
+bus = &"SFX"
+
+[node name="AudioStreamPlayer_Running" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("7_n4y8q")
+volume_db = -4.457
+bus = &"SFX"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
