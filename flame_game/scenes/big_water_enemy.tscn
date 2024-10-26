@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://bvihag8nxol3u"]
+[gd_scene load_steps=25 format=3 uid="uid://bvihag8nxol3u"]
 
 [ext_resource type="Script" path="res://scripts/water_enemy.gd" id="1_4xquc"]
 [ext_resource type="Texture2D" uid="uid://col3wgr4x1udv" path="res://assets/Water Elemental/Spritesheets/Elemental Water 3/Elemental_Water_3_Attack.png" id="2_e4ufc"]
 [ext_resource type="Texture2D" uid="uid://qtoul2xmfey8" path="res://assets/Water Elemental/Spritesheets/Elemental Water 3/Elemental_Water_3_Idle.png" id="3_u2i5b"]
 [ext_resource type="Texture2D" uid="uid://plhalbyrq8ue" path="res://assets/Water Elemental/Spritesheets/Elemental Water 3/Elemental_Water_3_Move.png" id="4_wlktx"]
 [ext_resource type="Texture2D" uid="uid://bdahgy5qfdvic" path="res://assets/Light/light.png" id="5_npg8h"]
+[ext_resource type="PackedScene" uid="uid://ra8gg1sg3swx" path="res://scenes/health_bar_enemy.tscn" id="6_ubnkp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_satc3"]
 atlas = ExtResource("2_e4ufc")
@@ -136,8 +137,9 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pv2pr"]
-radius = 5.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t5jl7"]
+radius = 4.12043
+height = 18.0
 
 [node name="Big_Water_Enemy" type="CharacterBody2D"]
 collision_layer = 8
@@ -156,7 +158,8 @@ offset = Vector2(0, -4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
-shape = SubResource("CircleShape2D_pv2pr")
+rotation = 0.280998
+shape = SubResource("CapsuleShape2D_t5jl7")
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 
@@ -172,6 +175,12 @@ texture = ExtResource("5_npg8h")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(2.38419e-07, -4)
 scale = Vector2(0.1, 0.1)
+
+[node name="Health_Bar_Enemy" parent="." instance=ExtResource("6_ubnkp")]
+offset_left = -9.0
+offset_top = 7.0
+offset_right = 7.0
+offset_bottom = 11.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="ShootCooldownTimer" to="." method="_on_shoot_cooldown_timer_timeout"]

@@ -38,6 +38,7 @@ func _ready() -> void:
 	$Runaway_Timer.wait_time = runaway_time
 	$Rage_Cooldown_Timer.wait_time = rage_cooldown_time
 	runaway()
+	interact_fire_start()
 	
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("interact"):
@@ -119,6 +120,15 @@ func interact_fire():
 				is_running_away = false
 			else:
 				not_possessed.emit()
+
+func interact_fire_start():
+	if !is_possessed:
+		set_is_possessed()
+		get_possessed.emit()
+		%Player_Cam.set_to_follow(self)
+		is_running_away = false
+	else:
+		not_possessed.emit()
 			
 func chop_tree(object) -> bool:
 	if chop_cooldown:

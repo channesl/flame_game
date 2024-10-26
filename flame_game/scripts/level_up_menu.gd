@@ -26,17 +26,25 @@ func init_level_up():
 func set_perks_label():
 	if player.current_level == 1:
 		perks_label.text = "
-		Ability Unlocked: Fireball [MouseButton 1]\n"
+		Ability Unlocked For Fire: Fireball [MouseButton 1]\n"
 		player.fireball_unlocked = true
 	if player.current_level == 2:
-		perks_label.text = ""
+		perks_label.text = "
+		Ability Unlocked For Fire: Dash [Space] (Towards mouse position)\n"
+		player.is_dash_unlocked = true
 		player.spawn_enemy_interval -= 5
 	if player.current_level == 3:
 		perks_label.text = "
-		Ability Unlocked: Dash [Space] (Towards mouse position)\n"
-		player.is_dash_unlocked = true
+		Ability Unlocked For Lumberjack: Rage [E]\n
+		(Hit faster and projectiles don't expell fire)\n
+		Ability Unlocked For Fire: Frenzy [E]\n
+		(Shoot faster and shooting don't cost health)\n"
+		player.is_frenzy_unlocked = true
+		lumberjack.is_rage_unlocked = true
 	if player.current_level == 4:
-		perks_label.text = ""
+		perks_label.text = "
+		Ability Unlocked For Fire: Spawn Minion [Space]\n 
+		(Minion will kill enemies for you for a short time)\n"
 		
 		
 func set_extra_perk_labels():
@@ -97,9 +105,9 @@ func randomize_extra_perks():
 		2: 
 			perks_list = [1, 2, 3, 4, 5]
 		3: 
-			perks_list = [1, 2, 3, 4, 5, 6, 7, 8]
+			perks_list = [1, 2, 3, 4, 5]
 		4: 
-			perks_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+			perks_list = [1, 2, 3, 4, 5]
 			
 	if player.is_minion_unlocked and perks_list.find(6) != -1:
 		perks_list.remove_at(perks_list.find(6))

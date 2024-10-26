@@ -10,6 +10,7 @@ height = 10.0
 [node name="Projectile_Leaf" type="Area2D"]
 collision_mask = 18
 script = ExtResource("1_hndkh")
+speed = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708

@@ -6,6 +6,7 @@ extends StaticBody2D
 @onready var leaf_enemy : PackedScene = preload("res://scenes/leaf_enemy.tscn")
 @onready var audio_falling : PackedScene = preload("res://scenes/audio/audio_stream_player_tree_falling.tscn")
 @onready var audio_group = get_node("../../Audio")
+@onready var original_modulate = modulate
 
 @export var max_health : int = 10
 @export var is_magic : bool
@@ -15,6 +16,7 @@ var text_length : int = 15
 var player_in_area : bool = false
 var mouse_in_area : bool = false
 var current_health : int
+var objects_behind_tree : int = 0
 
 var lumberjack
 var trees
@@ -31,6 +33,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	chop_down()
+	make_transparent()
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -75,3 +78,20 @@ func _on_area_2d_mouse_entered() -> void:
 
 func _on_area_2d_mouse_exited() -> void:
 	mouse_in_area = false
+
+
+
+func _on_transparent_behind_body_entered(body: Node2D) -> void:
+	if "is_possessing" in body or "is_possessed" in body:
+		objects_behind_tree += 1
+
+func _on_transparent_behind_body_exited(body: Node2D) -> void:
+	if "is_possessing" in body or "is_possessed" in body:
+		objects_behind_tree -= 1
+
+func make_transparent():
+	var tween = get_tree().create_tween()
+	if objects_behind_tree > 0:
+		tween.tween_property(self, "modulate", Color(1, 1, 1, 0.5), 0.2)
+	else:
+		tween.tween_property(self, "modulate", original_modulate ,0.2)

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://ra8gg1sg3swx"]
+
+[ext_resource type="Texture2D" uid="uid://cde4xbxhsksdb" path="res://assets/Fire Bar/xp_inner.png" id="1_hvixn"]
+[ext_resource type="Script" path="res://scenes/health_bar_enemy.gd" id="2_vm6wd"]
+
+[node name="Health_Bar_Enemy" type="TextureProgressBar"]
+self_modulate = Color(2, 2, 2, 1)
+offset_left = -8.0
+offset_top = 1.0
+offset_right = 8.0
+offset_bottom = 5.0
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_top = 1
+stretch_margin_right = 1
+stretch_margin_bottom = 1
+texture_under = ExtResource("1_hvixn")
+texture_progress = ExtResource("1_hvixn")
+tint_under = Color(0, 0, 0, 1)
+tint_progress = Color(0.679015, 2.86378e-06, 2.88785e-07, 1)
+script = ExtResource("2_vm6wd")

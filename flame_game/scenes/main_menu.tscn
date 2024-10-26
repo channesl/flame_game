@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://dhd0p0t52t27g"]
+[gd_scene load_steps=64 format=3 uid="uid://dhd0p0t52t27g"]
 
 [ext_resource type="Texture2D" uid="uid://cfb8eteyog5de" path="res://assets/UI/Logo.png" id="1_kj6t1"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_t60uu"]
@@ -23,6 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://dujbm4tfjbcik" path="res://sounds/Menu/Sketchbook 2024-03-20_02.ogg" id="18_kq7su"]
 [ext_resource type="AudioStream" uid="uid://bgfpm7ki37l6r" path="res://sounds/Ambiance/Ambiance_Firecamp_Medium_Loop_Mono.wav" id="22_8lji0"]
 [ext_resource type="AudioStream" uid="uid://b3c8kb5wog7q5" path="res://sounds/FireBall/03_Fire_explosion_03_medium.wav" id="23_u2cma"]
+[ext_resource type="AudioStream" uid="uid://catldcljmndi5" path="res://sounds/Possess/22_Slash_04.wav" id="24_anslh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_opgm5"]
 atlas = ExtResource("2_x1csk")
@@ -95,7 +96,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Possessed",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -456,7 +457,13 @@ autoplay = true
 bus = &"Ambiance"
 
 [node name="AudioStreamPlayer_Spark" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("23_u2cma")
+bus = &"SFX"
+
+[node name="AudioStreamPlayer_Possess" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("24_anslh")
 bus = &"SFX"
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/MarginContainer/CenterContainer/VBoxContainer/Play_button" to="." method="_on_play_button_pressed"]

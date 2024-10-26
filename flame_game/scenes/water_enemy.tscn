@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://bncy5rjo5j0yv"]
+[gd_scene load_steps=25 format=3 uid="uid://bncy5rjo5j0yv"]
 
 [ext_resource type="Texture2D" uid="uid://c3m5t8oelpvqf" path="res://assets/Water Elemental/Spritesheets/Elemental Water 2/Elemental_Water_2_Idle.png" id="1_emdhh"]
 [ext_resource type="Script" path="res://scripts/water_enemy.gd" id="1_jw8to"]
 [ext_resource type="Texture2D" uid="uid://bgg858vpw8vyj" path="res://assets/Water Elemental/Spritesheets/Elemental Water 2/Elemental_Water_2_Attack.png" id="2_h2viq"]
 [ext_resource type="Texture2D" uid="uid://bd0v82ifln7d4" path="res://assets/Water Elemental/Spritesheets/Elemental Water 2/Elemental_Water_2_Move.png" id="2_kfwcw"]
 [ext_resource type="Texture2D" uid="uid://bdahgy5qfdvic" path="res://assets/Light/light.png" id="5_o6bt3"]
+[ext_resource type="PackedScene" uid="uid://ra8gg1sg3swx" path="res://scenes/health_bar_enemy.tscn" id="6_q7eb6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s0f4n"]
 atlas = ExtResource("2_h2viq")
@@ -170,6 +171,10 @@ texture = ExtResource("5_o6bt3")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(2.38419e-07, -4)
 scale = Vector2(0.1, 0.1)
+
+[node name="Health_Bar_Enemy" parent="." instance=ExtResource("6_q7eb6")]
+offset_top = 2.0
+offset_bottom = 6.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="ShootCooldownTimer" to="." method="_on_shoot_cooldown_timer_timeout"]

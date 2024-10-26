@@ -4,6 +4,8 @@ extends Area2D
 
 @onready var shoot_audio = preload("res://scenes/audio/audio_stream_player_big_water_shoot.tscn")
 @onready var audio_group = get_node("../../Audio")
+@onready var collision_particles = preload("res://scenes/particles/water_collision_particles.tscn")
+@onready var particles_group = get_node("../../Particles")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,3 +40,9 @@ func on_spawn():
 	audio_group.call_deferred("add_child", new_shoot_audio_scene)
 	new_shoot_audio_scene.position = position
 	new_shoot_audio_scene.play()
+
+func hit_object():
+	var new_particles_scene = collision_particles.instantiate()
+	particles_group.call_deferred("add_child", new_particles_scene)
+	new_particles_scene.position = position
+	new_particles_scene.emitting = true

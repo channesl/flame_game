@@ -24,6 +24,7 @@ func update_objective():
 			if progress >= progress_goal:
 				current_objective += 1
 				progress = 0
+				%Magic_Tree.open_tree()
 		# Enter Mother Tree
 		1:
 			%Magic_Log.hide()

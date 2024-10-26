@@ -1,4 +1,4 @@
-extends TextureProgressBar
+extends Control
 
 @export var player : CharacterBody2D
 
@@ -11,4 +11,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update() -> void:
-	value = player.current_health * 100 / player.max_health
+	$TextureProgressBar.value = player.current_health * 100 / player.max_health

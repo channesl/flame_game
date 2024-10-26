@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8a563eusn7r2"]
+[gd_scene load_steps=8 format=3 uid="uid://b8a563eusn7r2"]
 
 [ext_resource type="Texture2D" uid="uid://b8pyj7igst01q" path="res://assets/mystic_woods/objects/objects.png" id="1_fmv4n"]
 [ext_resource type="Script" path="res://scripts/tree.gd" id="1_utabf"]
+[ext_resource type="PackedScene" uid="uid://ra8gg1sg3swx" path="res://scenes/health_bar_enemy.tscn" id="3_2cjek"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xl36l"]
 radius = 11.0
@@ -13,6 +14,9 @@ radius = 34.0147
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ajx1a"]
 cull_mode = 2
 polygon = PackedVector2Array(0, 9, -11, 11, -12, 22, -6, 26, 10, 26, 12, 21, 12, 18, 10, 12, 7, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2m8ys"]
+radius = 22.0
 
 [node name="Tree" type="StaticBody2D"]
 y_sort_enabled = true
@@ -48,7 +52,22 @@ visible = false
 position = Vector2(-1, 0)
 occluder = SubResource("OccluderPolygon2D_ajx1a")
 
+[node name="Health_Bar_Enemy" parent="." instance=ExtResource("3_2cjek")]
+offset_left = -12.0
+offset_top = 4.0
+offset_right = 12.0
+offset_bottom = 8.0
+
+[node name="Transparent_Behind" type="Area2D" parent="."]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Transparent_Behind"]
+position = Vector2(0, -32)
+shape = SubResource("CircleShape2D_2m8ys")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="body_entered" from="Transparent_Behind" to="." method="_on_transparent_behind_body_entered"]
+[connection signal="body_exited" from="Transparent_Behind" to="." method="_on_transparent_behind_body_exited"]

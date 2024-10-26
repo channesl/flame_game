@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4h0df41k4j7n"]
+[gd_scene load_steps=9 format=3 uid="uid://b4h0df41k4j7n"]
 
 [ext_resource type="Script" path="res://scripts/tree.gd" id="1_4i5db"]
 [ext_resource type="Texture2D" uid="uid://pvbq1yqql1tx" path="res://assets/Magic tree/Magic_tree_small.png" id="2_c3tin"]
 [ext_resource type="Texture2D" uid="uid://bdahgy5qfdvic" path="res://assets/Light/light.png" id="3_8cxui"]
+[ext_resource type="PackedScene" uid="uid://ra8gg1sg3swx" path="res://scenes/health_bar_enemy.tscn" id="4_8neuq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xl36l"]
 radius = 11.0
@@ -14,6 +15,9 @@ radius = 34.0147
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ajx1a"]
 cull_mode = 2
 polygon = PackedVector2Array(0, 9, -11, 11, -12, 22, -6, 26, 10, 26, 12, 21, 12, 18, 10, 12, 7, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_16ki8"]
+radius = 22.0
 
 [node name="Magic_Tree_Small" type="StaticBody2D"]
 y_sort_enabled = true
@@ -62,7 +66,22 @@ color = Color(0.564706, 0.156863, 1, 1)
 energy = 0.6
 texture = ExtResource("3_8cxui")
 
+[node name="Transparent_Behind" type="Area2D" parent="."]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Transparent_Behind"]
+position = Vector2(0, -32)
+shape = SubResource("CircleShape2D_16ki8")
+
+[node name="Health_Bar_Enemy" parent="." instance=ExtResource("4_8neuq")]
+offset_left = -12.0
+offset_top = 4.0
+offset_right = 12.0
+offset_bottom = 8.0
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="body_entered" from="Transparent_Behind" to="." method="_on_transparent_behind_body_entered"]
+[connection signal="body_exited" from="Transparent_Behind" to="." method="_on_transparent_behind_body_exited"]

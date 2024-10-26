@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://doqdkwnqc2a47"]
+[gd_scene load_steps=31 format=3 uid="uid://doqdkwnqc2a47"]
 
 [ext_resource type="Script" path="res://scripts/player_fire.gd" id="1_yrmfs"]
 [ext_resource type="Texture2D" uid="uid://cmrne26v3e3i" path="res://assets/Fire Elemental 2/Monster Pack 37 (Elementals 2)/Spritesheets/Elemental Fire 2/Elemental_Fire_2_Idle.png" id="2_j7in3"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://daos3fnrblok5" path="res://sounds/Dash/52_Dive_02.wav" id="7_iiqll"]
 [ext_resource type="AudioStream" uid="uid://djopmb1lp1o8w" path="res://sounds/PowerUp/55_Encounter_02.wav" id="8_ska4j"]
 [ext_resource type="AudioStream" uid="uid://bntlqh36vqjuk" path="res://sounds/Summon/39_Absorb_04.wav" id="9_tlkm5"]
+[ext_resource type="AudioStream" uid="uid://catldcljmndi5" path="res://sounds/Possess/22_Slash_04.wav" id="10_6iyva"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7lk73"]
 atlas = ExtResource("2_o065p")
@@ -164,7 +165,6 @@ spawn_enemy_interval = 20.0
 shoot_cooldown_time = 1.5
 fireball_cost = 10
 damage = 10
-fireball_unlocked = true
 time_damage = 2
 time_damage_possessing = 1
 loose_health_time = 0.5
@@ -174,7 +174,6 @@ minion_cooldown_time = 30.0
 dash_cooldown_time = 5.0
 dash_speed = 400.0
 dash_duration = 0.3
-is_dash_unlocked = true
 ghost_amount = 5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -274,6 +273,10 @@ stream = ExtResource("8_ska4j")
 
 [node name="AudioStreamPlayer_Minion" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("9_tlkm5")
+
+[node name="AudioStreamPlayer_Possess" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("10_6iyva")
+bus = &"SFX"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -4,13 +4,40 @@
 [ext_resource type="Script" path="res://scripts/health_bar.gd" id="1_ofaca"]
 [ext_resource type="Texture2D" uid="uid://cqby5eivd65ba" path="res://assets/Fire Bar/FireBar_Over.png" id="2_257jj"]
 
-[node name="Health_Bar" type="TextureProgressBar"]
-offset_right = 7.0
-offset_bottom = 7.0
+[node name="Health_Bar" type="Control"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_ofaca")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+custom_minimum_size = Vector2(100, 5)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -409.0
+offset_top = -90.0
+offset_right = -292.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(7, 7)
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
 texture_under = ExtResource("1_ippwy")
 texture_over = ExtResource("2_257jj")
 texture_progress = ExtResource("1_ippwy")
-tint_under = Color(0.190762, 0.190762, 0.190762, 1)
-tint_over = Color(0.113725, 0.113725, 0.113725, 1)
-tint_progress = Color(1, 0.529412, 0, 1)
-script = ExtResource("1_ofaca")
+tint_under = Color(0.140447, 0.140447, 0.140447, 1)
+tint_over = Color(0, 0, 0, 1)
+tint_progress = Color(1, 0.232895, 0.135955, 1)

@@ -5,6 +5,10 @@ extends StaticBody2D
 @onready var current_health : int = max_health
 
 @onready var log : PackedScene = preload("res://scenes/log.tscn")
+@onready var hit_audio = preload("res://scenes/audio/audio_stream_player_hit.tscn")
+@onready var audio_group = get_node("../../../Audio")
+@onready var collision_particles = preload("res://scenes/particles/fire_collision_particles.tscn")
+@onready var particles_group = get_node("../../../Particles")
 
 @onready var boss_room : Node2D = get_node("../../")
 @onready var animated_sprite : Node2D = $AnimatedSprite2D
@@ -32,6 +36,7 @@ func damage_player():
 		player.current_health -= damage
 		player.healthChanged.emit()
 		has_damaged = true
+		hit_object()
 
 func check_if_up():
 	if animated_sprite.frame > 13:
@@ -60,3 +65,13 @@ func check_health():
 		boss_room.roots_broken += 1
 		queue_free()
 		
+
+func hit_object():
+	var new_hit_audio_scene = hit_audio.instantiate()
+	audio_group.call_deferred("add_child", new_hit_audio_scene)
+	new_hit_audio_scene.position = player.position
+	new_hit_audio_scene.play()
+	var new_particles_scene = collision_particles.instantiate()
+	particles_group.call_deferred("add_child", new_particles_scene)
+	new_particles_scene.position = player.position
+	new_particles_scene.emitting = true

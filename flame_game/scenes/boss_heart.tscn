@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bd8ht4flvnghq"]
+[gd_scene load_steps=16 format=3 uid="uid://bd8ht4flvnghq"]
 
 [ext_resource type="Texture2D" uid="uid://dundio36kgiap" path="res://assets/heart/Heart-sheet.png" id="1_t3c64"]
 [ext_resource type="Script" path="res://scripts/boss_heart.gd" id="1_u6fyr"]
@@ -71,9 +71,13 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_caw4r"]
 radius = 7.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_j0uni"]
+radius = 8.0
+
 [node name="Boss_Heart" type="StaticBody2D"]
 collision_layer = 8
 script = ExtResource("1_u6fyr")
+max_health = 6
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_b0w7c")
@@ -94,4 +98,10 @@ texture_scale = 0.6
 stream = ExtResource("5_pqdxc")
 max_polyphony = 6
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_j0uni")
+
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

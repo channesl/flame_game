@@ -29,9 +29,11 @@ func start_animation():
 	tween.tween_property(%Log, "modulate", Color(0.5,0.5,0.5,1),0.5).set_ease(Tween.EaseType.EASE_IN)
 	tween.tween_property(%Log, "position", %Log.position + Vector2(0,300),0.5).set_ease(Tween.EaseType.EASE_IN)
 	tween.tween_callback(%Log.queue_free)
+	tween.tween_callback(play_sound.bind(%AudioStreamPlayer_Spark))
 	tween.tween_callback(set_object_visible.bind("fire"))
 	tween.tween_interval(0.5)
-	tween.tween_property(%Fire, "position", %Fire.position + Vector2(250,-66),0.5).set_ease(Tween.EaseType.EASE_IN_OUT)
+	tween.tween_callback(play_sound.bind(%AudioStreamPlayer_Possess))
+	tween.tween_property(%Fire, "position", %Fire.position + Vector2(250,-66),0.15).set_ease(Tween.EaseType.EASE_IN_OUT)
 	tween.tween_callback(%Fire.queue_free)
 	tween.tween_callback(change_animation)
 	tween.tween_interval(1)
@@ -48,4 +50,8 @@ func change_animation():
 	%Lumberjack.play("Possessed")
 	
 func change_to_game_scene():
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	var loading_screen = load("res://scenes/loading_screen.tscn")
+	get_tree().change_scene_to_packed(loading_screen)
+
+func play_sound(sound):
+	sound.play()

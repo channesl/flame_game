@@ -5,6 +5,8 @@ signal xpChanged
 signal start_possess
 signal stop_possess
 signal level_up
+signal died
+signal game_won
 
 signal frenzy_activated
 signal frenzy_over
@@ -25,6 +27,7 @@ signal shoot_activated
 @onready var audio_dash : AudioStreamPlayer2D = $Audio/AudioStreamPlayer_Dash
 @onready var audio_frenzy : AudioStreamPlayer2D = $Audio/AudioStreamPlayer_Frenzy
 @onready var audio_minion : AudioStreamPlayer2D = $Audio/AudioStreamPlayer_Minion
+@onready var audio_possess : AudioStreamPlayer2D = $Audio/AudioStreamPlayer_Possess
 @onready var cursor_axe = preload("res://assets/Cursors/Axe_Cursor.png")
 @onready var cursor_fireball = preload("res://assets/Cursors/Fireball_Cursor.png")
 
@@ -50,7 +53,7 @@ signal shoot_activated
 
 @export_subgroup("Minion")
 @export var minion_cooldown_time : float
-@export var is_minion_unlocked : bool = true
+@export var is_minion_unlocked : bool = false
 
 @export_subgroup("Dash")
 @export var dash_cooldown_time : float
@@ -64,7 +67,7 @@ signal shoot_activated
 var shoot_cooldown : bool = false
 var input_direction : Vector2 = Vector2.ZERO
 var animation_locked : bool = false
-var is_possessing : bool = false
+var is_possessing : bool = true
 var current_level : int = 0
 
 var frenzy_cooldown : bool = false
@@ -162,6 +165,7 @@ func set_is_possessing():
 	if !is_possessing:
 		start_possess.emit()
 	is_possessing = not is_possessing
+	audio_possess.play()
 			
 func set_visability():
 	if is_possessing:
@@ -177,6 +181,7 @@ func update_health() -> void:
 		current_health = max_health
 	if current_health <= 0:
 		current_health = 0
+		died.emit()
 	if is_possessing:
 		current_health -= time_damage_possessing
 	else:

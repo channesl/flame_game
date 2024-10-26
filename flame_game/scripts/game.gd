@@ -2,6 +2,8 @@ extends Node2D
 
 func _ready() -> void:
 	%Player_Fire.level_up.connect(level_up_screen)
+	%Player_Fire.died.connect(game_over_screen)
+	%Player_Fire.game_won.connect(game_won_screen)
 	$Level_Up_Screen/Level_Up_Menu.perk_chosen.connect(extra_perk_chosen)
 
 func pause():
@@ -44,3 +46,14 @@ func forest_audio_handler():
 		$Audio/AudioStreamPlayer_Main_Music.stream_paused = true
 	else:
 		$Audio/AudioStreamPlayer_Boss_Music.stream_paused = true
+
+func game_over_screen():
+	get_tree().paused = true
+	$Game_Over/Game_Over_Screen.show()
+	Input.set_custom_mouse_cursor(null)
+	
+func game_won_screen():
+	get_tree().paused = true
+	$Game_Over/Game_Over_Screen.show()
+	$Game_Over/Game_Over_Screen.set_top_label("You Win!")
+	Input.set_custom_mouse_cursor(null)

@@ -13,7 +13,7 @@ extends Area2D
 func _ready() -> void:
 	on_spawn()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	position += (Vector2.RIGHT*speed).rotated(rotation)
 
 func _on_body_entered(body: Node2D) -> void:
