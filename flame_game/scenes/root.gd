@@ -25,6 +25,9 @@ var has_damaged = false
 func _ready() -> void:
 	roots = get_node("..")
 	$CollisionShape2D.disabled = true
+	if boss_room.current_stage % 2 == 1:
+		animated_sprite.frame = 8
+	print(global_position)
 	
 func _physics_process(delta: float) -> void:
 	damage_player()
@@ -32,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	check_if_up()
 	
 func damage_player():
-	if player_in_area and animated_sprite.frame > 14 and !has_damaged:
+	if player_in_area and animated_sprite.frame > 14 and !has_damaged and !player.is_dashing:
 		player.current_health -= damage
 		player.healthChanged.emit()
 		has_damaged = true

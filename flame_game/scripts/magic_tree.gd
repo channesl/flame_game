@@ -5,6 +5,7 @@ extends StaticBody2D
 signal enters_boss_room
 
 @onready var objective_ui = get_node("../../Objective/Objective_UI")
+@onready var transition = get_node("../../Transition/Blackscreen_Transition")
 @onready var original_modulate = modulate
 
 var objects_behind_tree = 0
@@ -26,7 +27,7 @@ func open_tree():
 
 func _on_enter_area_body_entered(body: Node2D) -> void:
 	if "is_possessing" in body:
-		body.position = boss_room.get_child(-1).global_position
+		transition.enter_tree(body, boss_room.get_child(-1).global_position)
 		body.is_in_boss_room = true
 		enters_boss_room.emit()
 		objective_ui.current_objective += 1

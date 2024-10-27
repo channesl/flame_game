@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://bd8ht4flvnghq"]
+[gd_scene load_steps=18 format=3 uid="uid://bd8ht4flvnghq"]
 
 [ext_resource type="Texture2D" uid="uid://dundio36kgiap" path="res://assets/heart/Heart-sheet.png" id="1_t3c64"]
 [ext_resource type="Script" path="res://scripts/boss_heart.gd" id="1_u6fyr"]
 [ext_resource type="Texture2D" uid="uid://bk3i2cyvaoqtk" path="res://assets/heart/Heart_grey.png" id="2_wyjx7"]
+[ext_resource type="Texture2D" uid="uid://dj8aficmc2ldh" path="res://assets/heart/Pearl.png" id="3_kyr6u"]
 [ext_resource type="Texture2D" uid="uid://bdahgy5qfdvic" path="res://assets/Light/light.png" id="4_fulw8"]
 [ext_resource type="AudioStream" uid="uid://b855ujel0wytg" path="res://sounds/Heart/heartbeatnewaif-14812.mp3" id="5_pqdxc"]
 
@@ -29,6 +30,10 @@ region = Rect2(64, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_2r18m"]
 atlas = ExtResource("1_t3c64")
 region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y67ci"]
+atlas = ExtResource("3_kyr6u")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8mj7x"]
 atlas = ExtResource("2_wyjx7")
@@ -61,6 +66,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_y67ci")
+}],
+"loop": true,
+"name": &"Dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_8mj7x")
 }],
 "loop": true,
@@ -72,16 +85,17 @@ animations = [{
 radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j0uni"]
-radius = 8.0
+radius = 5.0
 
 [node name="Boss_Heart" type="StaticBody2D"]
-collision_layer = 8
+collision_layer = 9
+collision_mask = 5
 script = ExtResource("1_u6fyr")
-max_health = 6
+max_health = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_b0w7c")
-animation = &"Beating"
+animation = &"Dead"
 autoplay = "Beating"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -99,6 +113,7 @@ stream = ExtResource("5_pqdxc")
 max_polyphony = 6
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_j0uni")

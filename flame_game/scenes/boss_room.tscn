@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bd8ht4flvnghq" path="res://scenes/boss_heart.tscn" id="4_gwscl"]
 [ext_resource type="AudioStream" uid="uid://rs0q4rq3nonl" path="res://sounds/Root/040356318-pull-out-weeds-shrub-root-out-.wav" id="4_xm6f1"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6muku"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jyr02"]
 texture = ExtResource("1_owa0u")
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -266,11 +266,11 @@ terrain_set_0/terrain_0/color = Color(0, 0.717241, 0.775754, 1)
 terrain_set_1/mode = 0
 terrain_set_1/terrain_0/name = "Floor2"
 terrain_set_1/terrain_0/color = Color(0.249, 0.766229, 7.70092e-07, 1)
-sources/0 = SubResource("TileSetAtlasSource_6muku")
+sources/0 = SubResource("TileSetAtlasSource_jyr02")
 
 [node name="Boss_Room" type="Node2D"]
 script = ExtResource("1_ib2ew")
-time_before_roots = 5.0
+time_before_roots = 6.0
 time_between_roots = 7.0
 
 [node name="ColorRect" type="ColorRect" parent="."]

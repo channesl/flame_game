@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://byxjfmtvgalix"]
+
+[ext_resource type="AudioStream" uid="uid://c1ctefvwwjbm6" path="res://sounds/Heart/21_Debuff_01.wav" id="1_6b0er"]
+
+[node name="AudioStreamPlayer_Heart_Death" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_6b0er")
+autoplay = true
+max_distance = 10000.0
+attenuation = 1.1564e-05
+bus = &"SFX"

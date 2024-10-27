@@ -26,7 +26,7 @@ func init_level_up():
 func set_perks_label():
 	if player.current_level == 1:
 		perks_label.text = "
-		Ability Unlocked For Fire: Fireball [MouseButton 1]\n"
+		Ability Unlocked For Fire: Fireball [LMB]\n"
 		player.fireball_unlocked = true
 	if player.current_level == 2:
 		perks_label.text = "
@@ -43,8 +43,9 @@ func set_perks_label():
 		lumberjack.is_rage_unlocked = true
 	if player.current_level == 4:
 		perks_label.text = "
-		Ability Unlocked For Fire: Spawn Minion [Space]\n 
+		Ability Unlocked For Fire: Spawn Minion [Q]\n 
 		(Minion will kill enemies for you for a short time)\n"
+		player.is_minion_unlocked = true
 		
 		
 func set_extra_perk_labels():

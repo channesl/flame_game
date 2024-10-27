@@ -5,6 +5,7 @@ func _ready() -> void:
 	%Player_Fire.died.connect(game_over_screen)
 	%Player_Fire.game_won.connect(game_won_screen)
 	$Level_Up_Screen/Level_Up_Menu.perk_chosen.connect(extra_perk_chosen)
+	$Transition/Blackscreen_Transition.game_start()
 
 func pause():
 	get_tree().paused = true
