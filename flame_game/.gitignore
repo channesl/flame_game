@@ -1,3 +1,4 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+flame_game.exe
