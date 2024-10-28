@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 func start_animation():
 	var tween = get_tree().create_tween()
 	tween.tween_property(%Blackscreen, "modulate", Color(1, 1, 1, 0), 1)
-	tween.tween_property($Fire, "scale", 2,2.5)
+	tween.tween_property($Fire, "scale", Vector2(2, 2),2.5)
 	tween.tween_callback(set_menu_visible)
 	tween.tween_interval(0.5)
 	tween.tween_property(%Game_Over_Screen, "modulate", original_modulate, 0.5)

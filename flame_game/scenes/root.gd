@@ -9,6 +9,7 @@ extends StaticBody2D
 @onready var audio_group = get_node("../../../Audio")
 @onready var collision_particles = preload("res://scenes/particles/fire_collision_particles.tscn")
 @onready var particles_group = get_node("../../../Particles")
+@onready var camera = get_node("../../Player_Cam")
 
 @onready var boss_room : Node2D = get_node("../../")
 @onready var animated_sprite : Node2D = $AnimatedSprite2D
@@ -39,6 +40,7 @@ func damage_player():
 		player.current_health -= damage
 		player.healthChanged.emit()
 		has_damaged = true
+		camera.apply_shake()
 		hit_object()
 
 func check_if_up():
@@ -78,3 +80,4 @@ func hit_object():
 	particles_group.call_deferred("add_child", new_particles_scene)
 	new_particles_scene.position = player.position
 	new_particles_scene.emitting = true
+	

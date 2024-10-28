@@ -25,7 +25,7 @@ func lock_control():
 		
 func rage_activated():
 	var tween = create_tween()
-	tween.tween_property(%Rage_Bar, "value", 100, lumberjack.rage_duration)
+	tween.tween_property(%Rage_Bar, "value", 100, lumberjack.rage_time)
 	tween.tween_property(%Rage_Bar, "value", 0, lumberjack.rage_cooldown_time)
 	
 func chop_activated():

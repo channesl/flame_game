@@ -1,8 +1,13 @@
 extends Node2D
 
+@onready var hit_audio = preload("res://scenes/audio/audio_stream_player_hit.tscn")
+@onready var audio_group = get_node("Audio")
+@onready var collision_particles = preload("res://scenes/particles/fire_collision_particles.tscn")
+@onready var particles_group = get_node("Particles")
+
 func _ready() -> void:
 	%Player_Fire.level_up.connect(level_up_screen)
-	%Player_Fire.died.connect(game_over_screen)
+	%Player_Fire.died.connect(game_over_animation)
 	%Player_Fire.game_won.connect(game_won_screen)
 	$Level_Up_Screen/Level_Up_Menu.perk_chosen.connect(extra_perk_chosen)
 	$Transition/Blackscreen_Transition.game_start()
@@ -48,13 +53,40 @@ func forest_audio_handler():
 	else:
 		$Audio/AudioStreamPlayer_Boss_Music.stream_paused = true
 
+func game_over_animation():
+	
+	var tween = get_tree().create_tween()
+	tween.tween_callback(death_sound_particle)
+	tween.tween_interval(1.5)
+	tween.tween_callback($Game_Over/Game_Over_Screen.show)
+	tween.tween_callback(game_over_screen)
+
+func death_sound_particle():
+	%Player_Fire.hide()
+	var new_hit_audio_scene = hit_audio.instantiate()
+	audio_group.call_deferred("add_child", new_hit_audio_scene)
+	new_hit_audio_scene.position = %Player_Fire.position
+	new_hit_audio_scene.play()
+	var new_particles_scene = collision_particles.instantiate()
+	particles_group.call_deferred("add_child", new_particles_scene)
+	new_particles_scene.position = %Player_Fire.position
+	new_particles_scene.emitting = true
+
 func game_over_screen():
-	get_tree().paused = true
-	$Game_Over/Game_Over_Screen.show()
 	Input.set_custom_mouse_cursor(null)
 	
 func game_won_screen():
-	get_tree().paused = true
-	$Game_Over/Game_Over_Screen.show()
-	$Game_Over/Game_Over_Screen.set_top_label("You Win!")
-	Input.set_custom_mouse_cursor(null)
+	$Transition/Blackscreen_Transition.win_game()
+	
+	
+
+
+func _on_options_button_pressed() -> void:
+	$Options_Menu.show()
+	$Pause_Menu.hide()
+
+
+func _on_menu_button_pressed() -> void:
+	get_tree().paused = false
+	var main_screen = load("res://scenes/main_menu.tscn")
+	get_tree().change_scene_to_packed(main_screen)

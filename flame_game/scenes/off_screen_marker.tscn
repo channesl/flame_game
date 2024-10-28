@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://2kvoyi837s46"]
+
+[ext_resource type="Texture2D" uid="uid://2iovtjp03o32" path="res://assets/Magic tree/Off_Screen_Mark.png" id="1_sse65"]
+[ext_resource type="Script" path="res://scripts/off_screen_marker.gd" id="1_xm741"]
+[ext_resource type="Texture2D" uid="uid://b7idfnwaslfwg" path="res://assets/Magic tree/Only_Tree2.png" id="2_y7ki0"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cofj5"]
+light_mode = 1
+
+[node name="Off_Screen_Marker" type="Node2D"]
+z_index = 5
+position = Vector2(-8, 0)
+script = ExtResource("1_xm741")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("1_sse65")
+offset = Vector2(-8, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+light_mask = 512
+material = SubResource("CanvasItemMaterial_cofj5")
+position = Vector2(-12, 0)
+scale = Vector2(0.13, 0.13)
+texture = ExtResource("2_y7ki0")

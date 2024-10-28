@@ -64,7 +64,9 @@ func _on_animated_sprite_2d_animation_looped() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if "is_possessing" in body and current_health <= 0:
+		body.current_health = body.max_health
 		body.game_won.emit()
+		hide()
 
 func heart_death():
 	if !has_died:

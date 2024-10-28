@@ -17,6 +17,7 @@ var player_in_area : bool = false
 var mouse_in_area : bool = false
 var current_health : int
 var objects_behind_tree : int = 0
+var is_closest : bool = false
 
 var lumberjack
 var trees

@@ -30,6 +30,7 @@ signal shoot_activated
 @onready var audio_possess : AudioStreamPlayer2D = $Audio/AudioStreamPlayer_Possess
 @onready var cursor_axe = preload("res://assets/Cursors/Axe_Cursor.png")
 @onready var cursor_fireball = preload("res://assets/Cursors/Fireball_Cursor.png")
+@onready var original_modulate = $AnimatedSprite2D.modulate
 
 @export var movement_speed : float
 @export var max_health : int
@@ -86,6 +87,9 @@ var ghost_interval
 
 var is_in_boss_room = false
 
+var is_dead = false
+var has_won = false
+
 func _ready() -> void:
 	player_lumberjack.get_possessed.connect(set_is_possessing)
 	player_lumberjack.not_possessed.connect(release_lumberjack)
@@ -102,43 +106,45 @@ func _ready() -> void:
 	game_scene = get_node("..")
 	
 func _input(event: InputEvent) -> void:
-	if !is_possessing:
-		if Input.is_action_just_pressed("shoot"):
-			shoot_fireball()
-		elif Input.is_action_just_pressed("Ability1"):
-			activate_frenzy()
-		elif Input.is_action_just_pressed("Ability2"):
-			spawn_minion()
-		elif Input.is_action_just_pressed("dash"):
-			activate_dash()
+	if !is_dead:
+		if !is_possessing:
+			if Input.is_action_just_pressed("shoot"):
+				shoot_fireball()
+			elif Input.is_action_just_pressed("Ability1"):
+				activate_frenzy()
+			elif Input.is_action_just_pressed("Ability2"):
+				spawn_minion()
+			elif Input.is_action_just_pressed("dash"):
+				activate_dash()
 
 func _physics_process(delta: float) -> void:
 	
-	if !is_possessing:
-		movement()
-		move_and_slide()
-		update_facing_direction()
-		update_animation()
-		update_particles()
-		
-	set_visability()
-	update_spawn_interval()
-	audio_burning_handler()
-	cursor_handler()
+	if !is_dead:
+		if !is_possessing:
+			movement()
+			move_and_slide()
+			update_facing_direction()
+			update_animation()
+			update_particles()
+			
+		set_visability()
+		update_spawn_interval()
+		audio_burning_handler()
+		cursor_handler()
 	
 
 	
 func movement():
-	
-	input_direction = Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-	)
-		
-	input_direction = input_direction.normalized()
-	if !is_dashing:
-		velocity = input_direction * movement_speed
-		
+	if !is_dead:
+		input_direction = Vector2(
+			Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+			Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+		)
+			
+		input_direction = input_direction.normalized()
+		if !is_dashing:
+			velocity = input_direction * movement_speed
+			
 
 func update_facing_direction():
 	if not animation_locked:
@@ -179,8 +185,9 @@ func get_is_possessing() -> bool:
 func update_health() -> void:
 	if current_health > max_health:
 		current_health = max_health
-	if current_health <= 0:
+	if current_health <= 0 and !is_dead:
 		current_health = 0
+		is_dead = true
 		died.emit()
 	if is_possessing:
 		current_health -= time_damage_possessing
@@ -270,10 +277,12 @@ func activate_frenzy():
 		shoot_cooldown_time *= 0.5
 		frenzy_activated.emit()
 		audio_frenzy.play()
+		animated_sprite.modulate = Color(0,0.665,0.967,1)
 
 func _on_frenzy_duration_timer_timeout() -> void:
 	frenzy_active = false
 	shoot_cooldown_time *= 2
+	animated_sprite.modulate = original_modulate
 
 	$Frenzy_Cooldown_Timer.start()
 
@@ -342,7 +351,35 @@ func audio_burning_handler():
 		audio_burning.stream_paused = false
 		
 func cursor_handler():
-	if is_possessing:
-		Input.set_custom_mouse_cursor(cursor_axe)
-	else:
-		Input.set_custom_mouse_cursor(cursor_fireball)
+	if !is_dead:
+		if is_possessing:
+			Input.set_custom_mouse_cursor(cursor_axe)
+		else:
+			Input.set_custom_mouse_cursor(cursor_fireball)
+
+
+func set_closest_magic_tree():
+	var trees = get_node("../Trees").get_children()
+	var magic_trees : Array = []
+	var closest_tree
+	var closest_distance = INF
+	
+	for tree in trees:
+		if "is_magic" in tree:
+			if tree.is_magic and "objects_behind_tree" in tree:
+				magic_trees.append(tree)
+	
+	for tree in magic_trees:
+		var distance = position.distance_squared_to(tree.global_position)
+		if distance < closest_distance:
+			closest_distance = distance
+			closest_tree = tree
+		
+	magic_trees.remove_at(magic_trees.find(closest_tree))
+	for tree in magic_trees:
+		tree.is_closest = false
+	closest_tree.is_closest = true
+		
+		
+		
+		

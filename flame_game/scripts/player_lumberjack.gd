@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var audio_chop_leaf : AudioStreamPlayer2D = $Audio/AudioStreamPlayer_Chop_Leaf
 @onready var audio_rage : AudioStreamPlayer2D = $Audio/AudioStreamPlayer_Rage
 @onready var audio_running : AudioStreamPlayer2D = $Audio/AudioStreamPlayer_Running
+@onready var original_modulate = $AnimatedSprite2D.modulate
 
 @export var movement_speed : float = 200
 @export var chop_cooldown_time : float = 1
@@ -37,6 +38,7 @@ func _ready() -> void:
 	$Chop_Cooldown.wait_time = chop_cooldown_time
 	$Runaway_Timer.wait_time = runaway_time
 	$Rage_Cooldown_Timer.wait_time = rage_cooldown_time
+	$Rage_Time.wait_time = rage_time
 	runaway()
 	interact_fire_start()
 	
@@ -155,12 +157,13 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		animation_locked = false
 
 func expell_fire():
-	var random = RandomNumberGenerator.new()
-	random.randomize()
-	var rand = random.randf_range(0, 1)
-	if rand <= chance_to_expell:
-		player_fire.release_lumberjack()
-	
+	if !is_rage_active:
+		var random = RandomNumberGenerator.new()
+		random.randomize()
+		var rand = random.randf_range(0, 1)
+		if rand <= chance_to_expell:
+			player_fire.release_lumberjack()
+		
 func runaway():
 	is_running_away = true
 	var random = RandomNumberGenerator.new()
@@ -176,18 +179,19 @@ func _on_runaway_timer_timeout() -> void:
 	velocity = Vector2.ZERO
 	
 func activate_rage():
-	if is_rage_unlocked and !rage_cooldown:
+	if is_rage_unlocked and !rage_cooldown and is_possessed:
 		is_rage_active = true
 		rage_cooldown = true
 		chop_cooldown_time *= 0.5
-		$Rage_Cooldown_Timer.start()
+		$Rage_Time.start()
 		rage_activated.emit()
 		audio_rage.play()
+		animated_sprite.modulate = Color(1,0.318,0,1)
 
 
 func _on_rage_cooldown_timer_timeout() -> void:
 	rage_cooldown = false
-	chop_cooldown_time *= 2
+	
 
 func audio_running_handler():
 	if !audio_running.playing and !audio_running.stream_paused:
@@ -197,3 +201,10 @@ func audio_running_handler():
 	else:
 		audio_running.stream_paused = true
 		
+
+
+func _on_rage_time_timeout() -> void:
+	$Rage_Cooldown_Timer.start()
+	chop_cooldown_time *= 2
+	animated_sprite.modulate = original_modulate
+	is_rage_active = false
