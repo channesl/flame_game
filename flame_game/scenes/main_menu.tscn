@@ -442,7 +442,7 @@ size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.619608, 0.156863, 0.207843, 1)
 theme_override_fonts/font = ExtResource("2_aomc8")
 theme_override_font_sizes/font_size = 32
-text = "V 0.1
+text = "V 1.0.0
 Hannes Lindstrom"
 
 [node name="AudioStreamPlayer_Music" type="AudioStreamPlayer" parent="."]

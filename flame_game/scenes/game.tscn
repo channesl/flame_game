@@ -459,7 +459,6 @@ movement_speed = 100.0
 [node name="Player_Fire" parent="." instance=ExtResource("5_vsqa3")]
 unique_name_in_owner = true
 position = Vector2(2162, 1832)
-fireball_unlocked = true
 frenzy_duration = 10.0
 frenzy_cooldown_time = 30.0
 

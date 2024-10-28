@@ -13,7 +13,8 @@ config_version=5
 config/name="flame_game"
 run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/image="res://assets/UI/Logo-exportX20_2.png"
+boot_splash/fullsize=false
 
 [display]
 
